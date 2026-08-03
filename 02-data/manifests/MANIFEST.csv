@@ -1,1 +1,4 @@
 acquired_utc,source_url,local_path,sha256,bytes,licence,notes
+2026-08-03T19:53:58Z,https://zenodo.org/records/10397664,02-data/raw/metrics.tgz,237559b9abbe0475802f819c96e4d9e0ae0731ee3536b829401a0168331bc9a8,57967394,CC BY 4.0,Nearing et al. 2024 Nature 627:559-563 release; md5 5192860be64b3bc2f13e1244369314a1 matches Zenodo API
+2026-08-03T19:53:58Z,https://zenodo.org/records/10397664,02-data/raw/metadata.tgz,59c6b8310d171763671736cdc19a32ad3d79199729a15d48e7970f3f07a2ce10,625469608,CC BY 4.0,md5 4e1b371f9d93f91a449cc60a73eb52a1 matches Zenodo API
+2026-08-03T19:53:59Z,https://zenodo.org/records/10397664,02-data/raw/gauge_groups_for_paper.tgz,a72a2b777ef371bf94bf64b641876ae96d8794e8293aca815694c7185f09c34b,91640,CC BY 4.0,gauge group membership incl. grdc_filtered; md5 588342aad929cb0889eb1717413b70dc matches Zenodo API

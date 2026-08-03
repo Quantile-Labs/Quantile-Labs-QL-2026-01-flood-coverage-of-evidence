@@ -8,7 +8,7 @@ outcomes. A re-run after a post-unblinding bug fix gets its own row with the rea
 
 | UTC | Script | Git SHA | Inputs (sha256 prefix) | blind? | Outputs | Notes |
 |---|---|---|---|---|---|---|
-| | | | | | | |
+| 2026-08-03T20:02:01Z | `03-harness/00_day1_join_check.py` | c88d5c6 (script uncommitted at run time; committed this session, file sha256 `5d464eedf9b1`) | metrics.tgz `237559b9abbe` · metadata.tgz `59c6b8310d17` · gauge_groups_for_paper.tgz `a72a2b777ef3` | blind | stdout only — no file written | Day-1 feasibility. Reads gauge identifiers and coordinates only; opens no metric file and reads no skill value. Result: 5,678/5,678 joinable globally, 741/741 Africa. |
 
 ## Unblinding record
 

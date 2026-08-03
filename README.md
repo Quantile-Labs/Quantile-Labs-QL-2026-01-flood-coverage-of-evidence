@@ -23,7 +23,8 @@ metric is not evidence of poor skill.
 
 ## Progress
 
-- [ ] Feasibility check
+- [x] Feasibility check — **passed 2026-08-03.** Per-gauge metrics join to coordinates and a
+      country for 5,678/5,678 gauges globally and 741/741 in Africa.
 - [ ] Protocol frozen and published
 - [ ] Data acquired and manifested
 - [ ] Analysis
