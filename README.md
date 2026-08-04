@@ -1,6 +1,6 @@
 # QL-2026-01 — Coverage of evidence: Google Flood Hub
 
-**Type:** Note · **Access tier:** black box · **Status:** scoping
+**Type:** Note · **Access tier:** black box · **Status:** pre-registered
 
 ## Question
 
@@ -25,7 +25,9 @@ metric is not evidence of poor skill.
 
 - [x] Feasibility check — **passed 2026-08-03.** Per-gauge metrics join to coordinates and a
       country for 5,678/5,678 gauges globally and 741/741 in Africa.
-- [ ] Protocol frozen and published
+- [x] Protocol frozen and published — **v1.0, 2026-08-04**, sha256
+      `52ed62354fe58577c77661de5d20dc92a2991db84ad126d92c375e245efb71da`, tag
+      `QL-2026-01-protocol-v1.0`. Frozen before any metric value was read.
 - [ ] Data acquired and manifested
 - [ ] Analysis
 - [ ] Draft
