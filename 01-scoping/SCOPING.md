@@ -106,4 +106,42 @@ explicitly, and the limits box is written before the results section.
 **Date:** 2026-08-03
 **Conditional on:** the day-1 join check — per-gauge metrics must join to coordinates and a
 country. If it fails, this decision is superseded in `07-admin/DECISIONS.md` and QL-2026-04
-opens instead.
+opens instead. **Condition satisfied 2026-08-03**: 5,678/5,678 globally, 741/741 Africa.
+
+---
+
+## Correction — 2026-08-04
+
+Appended rather than edited above, so the error and its correction are both visible.
+
+**Question 4 above states that the Nature paper "discloses Africa F1 of 0.15–0.21 at the 5-year
+return period itself". This is wrong.** Those two numbers are the **South America** row read
+across two different models. The true values at the 5-year return period, 0-day lead, verified
+from committed cell outputs in `figure_4_continent_reliability_scores_distributions.ipynb`
+(repository pinned at commit `1e88caf`, manifested):
+
+| | GloFAS | AI model |
+|---|---|---|
+| **Africa** | **0.169748** | **0.262328** |
+| South America | 0.147253 | 0.210967 |
+| Asia | 0.241195 | 0.275652 |
+| North America | 0.246691 | 0.357473 |
+| Europe | 0.319904 | 0.385691 |
+| South West Pacific | 0.302418 | 0.456442 |
+
+Africa is **not** the lowest-scoring continent — South America is — and at the 5-year return
+period the AI model's African mean is roughly 55% above GloFAS's.
+
+**The consequence for the posture of this study.** The paper's *text* discloses no Africa F1
+anywhere. Figure 4 is boxplots, so the continent means are in neither the article nor the
+Extended Data; they exist in the companion repository's committed cell outputs and are
+recomputable from Zenodo. So the defensible statement is that **Africa's performance is
+recoverable from the published artefacts** — citing Fig. 4 and the repository — and **not** that
+the paper stated Africa's score.
+
+This narrows the "not a rebuttal" claim without weakening it. The Africa result that *is* in the
+paper's text is the null at the 1-year return period, where the AI model does not beat GloFAS
+(mean difference 0.004197, p = 0.069605, d = 0.028121). Which return period is cited changes the
+story considerably, and the Note must be explicit about which one it means every time.
+
+The answer to question 5 is unaffected: the study remains publishable whatever it concludes.
