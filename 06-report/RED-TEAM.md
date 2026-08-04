@@ -164,7 +164,11 @@ headline claim. The word is **published**. Every instance gets checked in the cl
 | # | Issue | Fixed / Disclosed / Rejected | Where |
 |---|---|---|---|
 | 1 | `hybas_*` entries may be ungauged prediction points, not noise — yesterday's correction may over-correct in the subject's favour | **Fixed — new Gate H.** Establish what `provider 23` / `catalogue.csv` designates from primary sources before the primary metric is computed. Unresolved ⇒ report both denominators with equal prominence and publish no single headline figure. | PROTOCOL §11, Gate H |
-| 2 | Version: we measure a 2024 artefact, the product may serve v2 | **Disclosed, and elevated.** Not fixable — v2 deposits no artefacts. Moves from a §1 caveat to a stated scope condition in the abstract: this is a finding about the 2024 release. | PROTOCOL §1, abstract |
+| 2 | Version: we measure a 2024 artefact, the product may serve v2 | **RESOLVED 2026-08-04 — was "disclosed, no action available", now a citable fact.** The developer's own repository (`google-research/flood-forecasting`, commit `affbaaa`) designates the Nature 2024 architecture the **"Former production model"** and Mean-Embedding-Forecast-LSTM the **"Current production model (as of December 2025)"**. The Note states this with the developer's as-of date, and the premise strengthens: the published per-gauge evidence base pertains to a superseded architecture. | PROTOCOL §11, §1 |
+| 9 | *(new)* Weights are public — a reader will ask why we stayed black box | **Disclosed as a choice.** White-box access is available and declined: this Note is about published evidence, not about generating new evidence. Stated in §2 so it does not read as ignorance. | PROTOCOL §2 |
+| 10 | *(new)* We would have missed a second published metrics artefact | **Fixed.** `pretrained-models/.../test_metrics.csv`, 10,137 basins, NSE/KGE, **zero African** — and unusable as skill evidence anyway by the developer's own warning of in-sample leakage. Both reasons reported. | PROTOCOL §7, §8 |
+| 11 | *(new)* "No African basins in the operational training list" is one sentence from a demolishing over-claim | **Fixed by pre-committing the wording.** May say: the operational model's African behaviour **cannot be independently replicated from released artefacts**. May **not** say: the model was not trained on African data. The constraint is redistribution rights — the 2024 work used 741 African GRDC gauges that cannot be redistributed. | PROTOCOL §8 |
+| 12 | *(new)* A Note about missing evidence that ignores what *was* published is not a fair account | **Fixed.** Credit for open-sourcing production architectures, releasing weights, and publishing a blunt anti-misuse warning goes near the front, in our own voice. | PROTOCOL §3 |
 | 3 | Denominator is a research inventory, not the serving surface | **Disclosed.** Gate A already forces the conservative frame; the abstract must carry it, not just §10. | Gate A, abstract |
 | 4 | "Measured" vs "published" | **Fixed.** "Measured" banned from title, abstract and headline claims. Checked in the claim-ladder pass. | §5 above, claim ladder |
 | 5 | Historical gauge network as the alternative explanation | **Fixed.** GRDC record length and station density reported in the same figure as the population weighting, and named in the abstract if coverage tracks the network. | PROTOCOL §9 confounders |
@@ -172,8 +176,18 @@ headline claim. The word is **published**. Every instance gets checked in the cl
 | 7 | We never looked at the product | **Disclosed** early and plainly, with the reason. | Note, first section |
 | 8 | Reliance is inferred, not observed | **Disclosed.** Rung B, and rung C for lower-confidence points. Never stated as fact. | Claim ladder |
 
-Items 1 and 2 are the two that could still sink this. Item 1 has an action. Item 2 does not, and
-the Note has to live inside it.
+~~Items 1 and 2 are the two that could still sink this. Item 1 has an action. Item 2 does not, and
+the Note has to live inside it.~~
+
+**Updated 2026-08-04, hours later.** Item 2 is resolved — the developer says in their own
+repository which model is in production, and it is not the one whose evidence we are mapping.
+**Item 1 (Gate H) is now the only unresolved item that can sink this**, which raises rather than
+lowers its priority: it is no longer one of two hazards to be balanced against each other, it is
+the hazard.
+
+Item 11 is the new one to watch. "No African basins in the operational training list" is true,
+verifiable, and one careless sentence away from an assertion we cannot support. The wording is
+pre-committed above for exactly that reason.
 
 ---
 
