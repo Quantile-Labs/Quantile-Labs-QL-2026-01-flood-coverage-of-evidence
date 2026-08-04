@@ -163,7 +163,7 @@ headline claim. The word is **published**. Every instance gets checked in the cl
 
 | # | Issue | Fixed / Disclosed / Rejected | Where |
 |---|---|---|---|
-| 1 | `hybas_*` entries may be ungauged prediction points, not noise — yesterday's correction may over-correct in the subject's favour | **Fixed — new Gate H.** Establish what `provider 23` / `catalogue.csv` designates from primary sources before the primary metric is computed. Unresolved ⇒ report both denominators with equal prominence and publish no single headline figure. | PROTOCOL §11, Gate H |
+| 1 | `hybas_*` entries may be ungauged prediction points, not noise — the correction may over-correct in the subject's favour | **CLOSED 2026-08-04 to the unresolved branch, and it was the right worry.** Both readings are dead: 98% disjoint from gauged basins and complementary in geography (so not bookkeeping); 1.6% of Africa's 224,827 level-12 basins (so not the ungauged surface); `provider 23` undocumented in any primary source. **Two denominators reported, no single headline figure** — and the denominator becomes an explicit four-rung ladder. | PROTOCOL §11, Gate H; §4/§5/§8 |
 | 2 | Version: we measure a 2024 artefact, the product may serve v2 | **RESOLVED 2026-08-04 — was "disclosed, no action available", now a citable fact.** The developer's own repository (`google-research/flood-forecasting`, commit `affbaaa`) designates the Nature 2024 architecture the **"Former production model"** and Mean-Embedding-Forecast-LSTM the **"Current production model (as of December 2025)"**. The Note states this with the developer's as-of date, and the premise strengthens: the published per-gauge evidence base pertains to a superseded architecture. | PROTOCOL §11, §1 |
 | 9 | *(new)* Weights are public — a reader will ask why we stayed black box | **Disclosed as a choice.** White-box access is available and declined: this Note is about published evidence, not about generating new evidence. Stated in §2 so it does not read as ignorance. | PROTOCOL §2 |
 | 10 | *(new)* We would have missed a second published metrics artefact | **Fixed.** `pretrained-models/.../test_metrics.csv`, 10,137 basins, NSE/KGE, **zero African** — and unusable as skill evidence anyway by the developer's own warning of in-sample leakage. Both reasons reported. | PROTOCOL §7, §8 |
@@ -179,7 +179,18 @@ headline claim. The word is **published**. Every instance gets checked in the cl
 ~~Items 1 and 2 are the two that could still sink this. Item 1 has an action. Item 2 does not, and
 the Note has to live inside it.~~
 
-**Updated 2026-08-04, hours later.** Item 2 is resolved — the developer says in their own
+**Updated 2026-08-04, later still.** Item 1 is closed too — to the unresolved branch, which is
+the honest disposition rather than a failure to decide. The pre-mortem's headline demolition
+scenario ("our headline excluded the exact locations the study is about") is now structurally
+impossible: there is no single headline number to be wrong. The denominator ladder replaces it,
+and the four questions in Gate G ask the subject the things no amount of our own work can settle.
+
+**The residual risk has moved.** It is no longer a wrong number; it is a reader who takes the
+top rung of the ladder — 741 of 224,827 — as the finding, when what it actually measures is the
+distance between an evaluation set and a basin inventory. Every rung needs its own sentence
+saying what it is and is not.
+
+**Updated 2026-08-04, hours earlier.** Item 2 is resolved — the developer says in their own
 repository which model is in production, and it is not the one whose evidence we are mapping.
 **Item 1 (Gate H) is now the only unresolved item that can sink this**, which raises rather than
 lowers its priority: it is no longer one of two hazards to be balanced against each other, it is
