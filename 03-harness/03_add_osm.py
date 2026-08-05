@@ -139,8 +139,20 @@ def main():
         dest = SCRATCH / f"{slug}.shp.zip"
         print(f"[{i}/{len(extracts)}] {slug} ({'+'.join(isos_here)}) {len(sub):,} basins ... ",
               end="", flush=True)
-        r = subprocess.run(["curl", "-sSfL", "-o", str(dest), url], capture_output=True)
-        if r.returncode != 0 or not dest.exists():
+        # Retry, as in 02_add_population.py. Lesotho failed on the first full run with a
+        # transient drop while its file was present and served fine on retry — the same
+        # class of failure that nearly cost DR Congo's 17,900 basins. A country lost to a
+        # flaky connection is not a random omission.
+        ok = False
+        for attempt in range(1, 4):
+            r = subprocess.run(["curl", "-sSfL", "--retry", "2", "--retry-delay", "3",
+                                "-C", "-", "-o", str(dest), url], capture_output=True)
+            if r.returncode == 0 and dest.exists() and dest.stat().st_size > 0:
+                ok = True
+                break
+            print(f"(attempt {attempt} failed) ", end="", flush=True)
+            dest.unlink(missing_ok=True)
+        if not ok:
             print("NO EXTRACT")
             failed.append(slug)
             continue
