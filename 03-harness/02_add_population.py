@@ -99,7 +99,15 @@ def zonal_sum(raster_path, basins, id_col="HYBAS_ID"):
 
 
 def african_iso3(basins_with_country):
-    return sorted({c for c in basins_with_country["iso3"].dropna().unique() if c})
+    """ISO3 codes present in the basin frame.
+
+    geoBoundaries carries a few non-ISO `shapeGroup` values (e.g. "111"). Filtering them
+    here keeps a permanent "NO RASTER" line out of the completion report, where it would
+    look like a real coverage gap rather than a junk code. The basins behind such codes are
+    still counted as unassigned and reported.
+    """
+    codes = {c for c in basins_with_country["iso3"].dropna().unique() if c}
+    return sorted(c for c in codes if len(c) == 3 and c.isalpha())
 
 
 def main():
