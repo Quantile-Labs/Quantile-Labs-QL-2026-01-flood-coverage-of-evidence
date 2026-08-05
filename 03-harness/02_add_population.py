@@ -66,7 +66,7 @@ GHSPOP_TILE_URL = ("https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_PO
 def manifest(path, url, licence, notes):
     """Record a file before it is deleted. Provenance outlives the bytes."""
     subprocess.run([sys.executable, str(LIB / "manifest.py"), "QL-2026-01", str(path),
-                    "--url", url, "--licence", licence, "--notes", notes], check=True)
+                    "--url", url, "--licence", licence, "--notes", notes, "--transient"], check=True)
 
 
 def zonal_sum(raster_path, basins, id_col="HYBAS_ID"):

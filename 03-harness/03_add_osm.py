@@ -75,7 +75,7 @@ LAYERS = ["gis_osm_buildings_a_free_1", "gis_osm_roads_free_1"]
 
 def manifest(path, url, notes):
     subprocess.run([sys.executable, str(LIB / "manifest.py"), "QL-2026-01", str(path),
-                    "--url", url, "--licence", "ODbL", "--notes", notes], check=True)
+                    "--url", url, "--licence", "ODbL", "--notes", notes, "--transient"], check=True)
 
 
 def count_into_basins(zip_path, basins):
