@@ -106,6 +106,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--surface", choices=["worldpop", "ghspop"], required=True)
     ap.add_argument("--countries", help="comma-separated ISO3 subset, for testing")
+    ap.add_argument("--force", action="store_true", help="re-do countries already populated")
     ap.add_argument("--keep-rasters", action="store_true",
                     help="do not delete after summing (needs the disk)")
     a = ap.parse_args()
@@ -128,43 +129,82 @@ def main():
     print(f"{a.surface}: {len(isos)} countries, {len(basins):,} basins")
     SCRATCH.mkdir(parents=True, exist_ok=True)
 
+    col = "pop_worldpop" if a.surface == "worldpop" else "pop_ghspop"
+    if col not in attrs.columns:
+        attrs[col] = pd.NA
+
+    # Clear anything a previous killed run left behind, so a partial download is never
+    # mistaken for a complete one.
+    for stale in SCRATCH.glob("*.tif"):
+        print(f"removing orphaned {stale.name} ({stale.stat().st_size:,} bytes)")
+        stale.unlink()
+
+    # Resume: a country whose basins already carry a population value is skipped. Makes the
+    # run restartable after a kill without re-downloading gigabytes.
+    done = set(attrs.loc[pd.to_numeric(attrs[col], errors="coerce").notna(), "iso3"].dropna())
+
     totals, failed = {}, []
     for i, iso in enumerate(isos, 1):
         sub = basins[basins["iso3"] == iso]
         if sub.empty:
             continue
+        if iso in done and not a.force:
+            print(f"[{i}/{len(isos)}] {iso}  already populated — skipping")
+            continue
         url = WORLDPOP_URL.format(iso3=iso, iso3_lower=iso.lower())
         dest = SCRATCH / f"{iso}.tif"
         print(f"[{i}/{len(isos)}] {iso}  {len(sub):,} basins ... ", end="", flush=True)
-        r = subprocess.run(["curl", "-sSfL", "-o", str(dest), url], capture_output=True)
-        if r.returncode != 0 or not dest.exists():
+
+        # Retry before giving up. A country dropped here is not a cosmetic gap: DR Congo is
+        # 17,900 basins, and losing it to one dropped connection would bias the denominator
+        # towards exactly the well-connected places this study is not about.
+        ok = False
+        for attempt in range(1, 4):
+            r = subprocess.run(["curl", "-sSfL", "--retry", "2", "--retry-delay", "3",
+                                "-C", "-", "-o", str(dest), url], capture_output=True)
+            if r.returncode == 0 and dest.exists() and dest.stat().st_size > 0:
+                ok = True
+                break
+            print(f"(attempt {attempt} failed) ", end="", flush=True)
+            dest.unlink(missing_ok=True)      # never leave a fragment that looks complete
+        if not ok:
             print("NO RASTER")
             failed.append(iso)
             continue
+
         manifest(dest, url, "CC BY 4.0",
                  f"WorldPop 100m UNadj UNCONSTRAINED 2020, {iso}. Summed into basins then deleted; "
                  f"hash recorded so the run reproduces without retaining the raster.")
         totals.update(zonal_sum(dest, sub))
         if not a.keep_rasters:
-            dest.unlink()
-        print(f"ok  ({len(totals):,} basins populated)")
+            dest.unlink(missing_ok=True)
 
-    # Update in place rather than overwrite, so a run over a country subset — or a resumed
-    # run after a dropped connection — adds to what is already there instead of erasing it.
-    col = "pop_worldpop" if a.surface == "worldpop" else "pop_ghspop"
-    if col not in attrs.columns:
-        attrs[col] = pd.NA
-    new = attrs["HYBAS_ID"].map(totals)
-    attrs[col] = new.combine_first(pd.to_numeric(attrs[col], errors="coerce"))
-    attrs.to_parquet(OUT / "basins_af.parquet", index=False)
+        # Checkpoint after every country. The first version of this script wrote once at the
+        # end and a kill during country 14 destroyed thirteen countries of work.
+        new = attrs["HYBAS_ID"].map(totals)
+        attrs[col] = new.combine_first(pd.to_numeric(attrs[col], errors="coerce"))
+        attrs.to_parquet(OUT / "basins_af.parquet", index=False)
+        print(f"ok  ({len(totals):,} basins this run, checkpointed)")
 
-    covered = attrs[col].notna().sum()
+    covered = pd.to_numeric(attrs[col], errors="coerce").notna().sum()
     print(f"\n{col}: {covered:,} / {len(attrs):,} basins ({100*covered/len(attrs):.1f}%)")
+
+    # A country missing from the population layer is not a cosmetic gap. It removes its
+    # basins from every population-weighted figure, and the countries most likely to fail
+    # are not a random sample. Report the size of what is missing, loudly.
+    missing_basins = 0
     if failed:
-        print(f"no raster for {len(failed)} countries: {failed}")
+        missing_basins = int(basins[basins["iso3"].isin(failed)]["HYBAS_ID"].nunique())
+        print(f"\n*** {len(failed)} COUNTRIES WITHOUT A RASTER — {missing_basins:,} basins "
+              f"({100*missing_basins/len(attrs):.1f}% of the study region) ***")
+        print(f"    {failed}")
+        print("    These basins are NA, not zero. Re-run to retry before using this layer;")
+        print("    if any remain, they must be named in the limits box, not averaged over.")
+
     (OUT / f"{a.surface}_run.json").write_text(json.dumps(
         {"surface": a.surface, "countries": len(isos), "basins_populated": int(covered),
-         "countries_without_raster": failed}, indent=2))
+         "countries_without_raster": failed, "basins_missing": missing_basins,
+         "complete": not failed}, indent=2))
     print("No metric value has been read.")
 
 

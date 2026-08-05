@@ -79,8 +79,13 @@ def manifest(path, url, notes):
 
 
 def count_into_basins(zip_path, basins):
-    """Count building polygons and road lines falling in each basin."""
-    counts = {}
+    """Count building polygons and road lines falling in each basin.
+
+    Returns (total_counts, per_layer_counts). Layers are kept apart because if roads
+    dominate, this variable is a road-mapping index and must be described as one rather
+    than as "settlement mapping density".
+    """
+    counts, per_layer = {}, {}
     with zipfile.ZipFile(zip_path) as z:
         names = z.namelist()
         for layer in LAYERS:
@@ -97,10 +102,12 @@ def count_into_basins(zip_path, basins):
                 gdf = gdf.to_crs(basins.crs)
             j = gpd.sjoin(gdf[["geometry"]], basins[["HYBAS_ID", "geometry"]],
                           how="inner", predicate="within")
-            for hid, n in j["HYBAS_ID"].value_counts().items():
+            vc = j["HYBAS_ID"].value_counts()
+            per_layer[layer] = int(vc.sum())
+            for hid, n in vc.items():
                 counts[hid] = counts.get(hid, 0) + int(n)
             del gdf, j
-    return counts
+    return counts, per_layer
 
 
 def main():
@@ -123,7 +130,7 @@ def main():
     print(f"{len(isos)} countries -> {len(extracts)} Geofabrik extracts, snapshot {SNAPSHOT}")
     SCRATCH.mkdir(parents=True, exist_ok=True)
 
-    totals, failed = {}, []
+    totals, failed, processed, layer_totals = {}, [], [], {}
     for i, (slug, isos_here) in enumerate(sorted(extracts.items()), 1):
         sub = basins[basins["iso3"].isin(isos_here)]
         if sub.empty:
@@ -141,13 +148,24 @@ def main():
                             f"Counted into basins then deleted; hash pins the snapshot so "
                             f"terciles are reproducible against a moving database.")
         try:
-            totals.update(count_into_basins(dest, sub))
+            c, per_layer = count_into_basins(dest, sub)
+            totals.update(c)
+            # A basin inside a successfully processed extract with no features has ZERO
+            # features. It is not unknown. Recording it as NA would drop the least-mapped
+            # basins out of stratum 3 — the exact places the stratum exists to identify —
+            # and would bias the tercile cut towards better-mapped ground. Chad: 5,045 of
+            # 9,667 basins are genuine zeros.
+            for hid in sub["HYBAS_ID"]:
+                totals.setdefault(hid, 0)
+            processed.extend(isos_here)
+            layer_totals[slug] = per_layer
         except Exception as e:                       # noqa: BLE001 — report, do not abort the run
             print(f"COUNT FAILED: {e}")
             failed.append(slug)
         finally:
             dest.unlink(missing_ok=True)
-        print(f"ok  ({len(totals):,} basins)")
+        nz = sum(1 for h in sub["HYBAS_ID"] if totals.get(h, 0) > 0)
+        print(f"ok  ({nz:,} basins with features, {len(sub) - nz:,} genuine zeros)")
 
     if "osm_feature_count" not in attrs.columns:
         attrs["osm_feature_count"] = pd.NA
@@ -160,21 +178,56 @@ def main():
     attrs["osm_feature_density"] = pd.to_numeric(attrs["osm_feature_count"],
                                                  errors="coerce") / area
 
-    # Terciles cut on the study-region distribution (PROTOCOL §8). Only basins actually
-    # covered by a downloaded extract may be cut; the rest stay NA rather than being
-    # silently binned as "low density", which would confuse unmapped with unprocessed.
+    # Terciles cut on the study-region distribution (PROTOCOL §8). Only basins inside a
+    # successfully processed extract may be cut; anything not downloaded stays NA, because
+    # confusing unprocessed with unmapped is the one error this stratum cannot make.
     covered = attrs["osm_feature_density"].notna()
-    attrs.loc[covered, "osm_density_tercile"] = pd.qcut(
-        attrs.loc[covered, "osm_feature_density"], 3,
-        labels=["T1_sparse", "T2", "T3_dense"], duplicates="drop")
+    dens = attrs.loc[covered, "osm_feature_density"]
+    zero_share = float((dens == 0).mean()) if len(dens) else 0.0
+
+    # With more than a third of basins at exactly zero, equal-sized terciles do not exist:
+    # qcut would silently collapse to two bins and the study would report a three-way
+    # stratification it never performed. Detect it and say so.
+    tercile_note = None
+    if zero_share > 1 / 3:
+        tercile_note = (f"{100*zero_share:.1f}% of covered basins have ZERO features, so "
+                        f"equal-frequency terciles do not exist. Cut is: T1_sparse = zero "
+                        f"features, T2/T3 = median split of the non-zero remainder. This is "
+                        f"a deviation from the equal-frequency reading of PROTOCOL §8 and is "
+                        f"reported as such.")
+        print(f"\n*** {tercile_note}")
+        nonzero = dens[dens > 0]
+        med = nonzero.median() if len(nonzero) else 0
+        attrs.loc[covered & (attrs["osm_feature_density"] == 0), "osm_density_tercile"] = "T1_sparse"
+        attrs.loc[covered & (attrs["osm_feature_density"] > 0)
+                  & (attrs["osm_feature_density"] <= med), "osm_density_tercile"] = "T2"
+        attrs.loc[covered & (attrs["osm_feature_density"] > med), "osm_density_tercile"] = "T3_dense"
+    else:
+        attrs.loc[covered, "osm_density_tercile"] = pd.qcut(
+            dens, 3, labels=["T1_sparse", "T2", "T3_dense"], duplicates="drop")
 
     attrs.to_parquet(OUT / "basins_af.parquet", index=False)
-    print(f"\nosm density: {int(covered.sum()):,} / {len(attrs):,} basins")
+    print(f"\nosm density: {int(covered.sum()):,} / {len(attrs):,} basins  "
+          f"({100*zero_share:.1f}% of them genuine zeros)")
+
+    # If roads dominate, this is a road-mapping index and the Note must call it that.
+    grand = {}
+    for per in layer_totals.values():
+        for k, v in per.items():
+            grand[k] = grand.get(k, 0) + v
+    if grand:
+        tot = sum(grand.values())
+        print("feature mix:")
+        for k, v in sorted(grand.items(), key=lambda kv: -kv[1]):
+            print(f"    {v:>12,}  {100*v/tot:5.1f}%  {k}")
+
     if failed:
         print(f"failed extracts ({len(failed)}): {failed}")
     (OUT / "osm_run.json").write_text(json.dumps(
         {"snapshot": SNAPSHOT, "extracts": len(extracts),
-         "basins_with_density": int(covered.sum()), "failed": failed}, indent=2))
+         "basins_with_density": int(covered.sum()), "zero_share": zero_share,
+         "tercile_note": tercile_note, "feature_mix": grand,
+         "countries_processed": sorted(set(processed)), "failed": failed}, indent=2))
     print("No metric value has been read.")
 
 
