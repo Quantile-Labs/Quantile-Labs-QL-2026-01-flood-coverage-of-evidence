@@ -42,6 +42,24 @@ shasum -a 256 00-protocol/PROTOCOL.md && cat 00-protocol/PROTOCOL.sha256
 git diff QL-2026-01-protocol-v1.0 QL-2026-01-protocol-v1.8 -- 00-protocol/PROTOCOL.md
 ```
 
+### Independent anchors, which do not rely on this repository
+
+Git commit and tag dates are set by whoever makes the commit, so they are self-asserted and a
+reader is right to discount them. Two anchors outside our control fix that, and both cover
+protocol v1.8, sha256 `ea0a1ac42f31fd0919f01a82d358e6dda152e79f79fe16f250599b9799664e95`:
+
+- **OpenTimestamps**, `00-protocol/PROTOCOL.md.ots`, which anchors that hash into the Bitcoin
+  blockchain and can be checked with `ots verify 00-protocol/PROTOCOL.md.ots` by anyone, with
+  no reference to us or to GitHub.
+- **Software Heritage**, snapshot `swh:1:snp:5918a1abf7ffa5d946009a89a9c8a6be4fa1eed5`,
+  archived 2026-08-06, which preserves the entire history independently of GitHub.
+
+**Be clear about what these do and do not establish.** They prove this protocol existed in
+this exact state on 2026-08-06, and they say nothing about the earlier dates, so the freeze
+date of 2026-08-04 recorded against v1.0 rests on this repository's own record and should be
+read as our claim rather than as an attested fact. What matters for the study is unaffected,
+because the anchor still lands before any metric value has been read, and none has been.
+
 Amendments are **appended** to §11 and the frozen text above it is never edited, so every
 version of the protocol remains independently verifiable at its own tag. Alongside it,
 `07-admin/RUNLOG.md` records every execution of every script, and `07-admin/DECISIONS.md`
