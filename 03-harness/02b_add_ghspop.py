@@ -38,11 +38,12 @@ INTERIM = STUDY / "02-data" / "interim"
 OUT = INTERIM / "strata"
 SCRATCH = INTERIM / "_scratch_ghs"
 
-_FORBIDDEN = [INTERIM / "metrics" / "return_period_metrics",
-              INTERIM / "metrics" / "hydrograph_metrics" / "per_gauge"]
-for _p in _FORBIDDEN:
-    if _p.exists():
-        sys.exit(f"REFUSING TO RUN: {_p} exists. Population weights must be built blind.")
+sys.path.insert(0, str(LIB))
+from blind import require_absent          # noqa: E402 — path must be set before the import
+
+# Structural blinding, PROTOCOL §10 as amended in v1.8: the shared helper, and the whole
+# metrics tree rather than named subdirectories inside it. See DECISIONS.md 2026-08-06.
+require_absent(INTERIM / "metrics")
 
 BASE = ("https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_POP_GLOBE_R2023A/"
         "GHS_POP_E2020_GLOBE_R2023A_54009_100/V1-0/tiles/"

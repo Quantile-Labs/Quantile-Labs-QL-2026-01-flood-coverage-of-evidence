@@ -2,15 +2,15 @@
 built without a metric value.
 
 BLIND. The band is a slice of a covariate that already exists in the frame; nothing new is
-read and no outcome is touched. The guard is restated rather than imported, so that deleting
-one script cannot silently disarm another — but it is **broader than the one in 01_ through
-03_**, for the reason given at the guard itself.
+read and no outcome is touched.
 
 NOTE ON THE RUN OF RECORD. The 2026-08-06T09:11:51Z execution logged in RUNLOG.md ran under
-the old, narrower guard; the guard was widened afterwards, on the same day, once the defect
-was found. Re-running this script now correctly refuses until the metrics tree is moved out
-of `02-data/interim/`. The output is unaffected — this script reads only the basin frame —
-but the sequence is recorded rather than smoothed over.
+the old, narrow guard, which named two subdirectories that had never been extracted and so
+could not fire. The guard was widened later the same day, once the defect was found, and then
+converted across every harness script to the shared `_lib/blind.py` helper. Re-running this
+script now correctly refuses until the metrics tree is moved out of `02-data/interim/`. The
+output is unaffected — this script reads only the basin frame — but the sequence is recorded
+rather than smoothed over.
 
     python3 03-harness/02c_add_pop_band.py
 
@@ -46,28 +46,24 @@ from pathlib import Path
 import pandas as pd
 
 STUDY = Path(__file__).resolve().parent.parent
+LIB = STUDY.parent / "_lib"
 INTERIM = STUDY / "02-data" / "interim"
 OUT = INTERIM / "strata"
 
-# The guard is the WHOLE metrics tree, not an enumeration of subdirectories inside it.
+sys.path.insert(0, str(LIB))
+from blind import require_absent          # noqa: E402 — path must be set before the import
+
+# Structural blinding, PROTOCOL §10 as amended in v1.8: the shared helper, and the WHOLE
+# metrics tree rather than named subdirectories inside it.
 #
-# 01_ through 03_ each named two specific paths — `metrics/return_period_metrics` and
-# `metrics/hydrograph_metrics/per_gauge`. Neither was ever extracted into the tree, so the
-# guard could not fire; meanwhile `metrics/concatenated_return_period_metrics` and
-# `metrics/hydrograph_metrics/per_metric/` were extracted on day 1 and sat unguarded, and
-# both hold outcome values. Blinding held in fact — no script opens those paths — but the
-# safeguard that was supposed to make that structural was inert for the whole build.
-# Found 2026-08-06 and logged. An enumeration of forbidden names fails silently the moment
-# a name is not what you guessed; the presence of the directory is the thing to test.
-_FORBIDDEN = [INTERIM / "metrics"]
-for _p in _FORBIDDEN:
-    if _p.exists():
-        sys.exit(
-            f"REFUSING TO RUN: {_p} exists.\n"
-            "Strata must be built with no metric value reachable in the tree. Move the\n"
-            "metrics directory out of 02-data/interim/ and re-run. Do not narrow this check\n"
-            "to a subdirectory — that is the failure this guard was rewritten to fix."
-        )
+# 01_ through 03_ each named `metrics/return_period_metrics` and
+# `metrics/hydrograph_metrics/per_gauge`. Neither was ever extracted, so the guard could not
+# fire, while `metrics/concatenated_return_period_metrics` and
+# `metrics/hydrograph_metrics/per_metric/` sat there unguarded from day 1 — both outcome
+# values. Blinding held in fact, since no script opens those paths, but the safeguard meant
+# to make that structural was inert for the whole build. Found 2026-08-06, logged, and fixed
+# in every script rather than only this one.
+require_absent(INTERIM / "metrics")
 
 # Pre-registered in PROTOCOL §8 and restated verbatim from 01_build_strata.py. Not re-derived
 # from the data, not tuned to give equal-sized bands — these are the numbers frozen before any

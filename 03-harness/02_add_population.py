@@ -35,13 +35,15 @@ INTERIM = STUDY / "02-data" / "interim"
 OUT = INTERIM / "strata"
 SCRATCH = INTERIM / "_scratch_raster"
 
-# Same blinding guard as 01_build_strata.py. Restated rather than imported so that deleting
-# one script cannot silently disarm the other.
-_FORBIDDEN = [INTERIM / "metrics" / "return_period_metrics",
-              INTERIM / "metrics" / "hydrograph_metrics" / "per_gauge"]
-for _p in _FORBIDDEN:
-    if _p.exists():
-        sys.exit(f"REFUSING TO RUN: {_p} exists. Population weights must be built blind.")
+sys.path.insert(0, str(LIB))
+from blind import require_absent          # noqa: E402 — path must be set before the import
+
+# Same blinding guard as 01_build_strata.py, and now literally the same code. This block used
+# to say "restated rather than imported so that deleting one script cannot silently disarm the
+# other" — which had it backwards. The inline copy named two subdirectories that were never
+# extracted, so it failed OPEN and guarded nothing; a missing import fails CLOSED. The target
+# is the whole metrics tree. PROTOCOL §10 as amended v1.8, DECISIONS.md 2026-08-06.
+require_absent(INTERIM / "metrics")
 
 # WorldPop 100 m, UN-adjusted, 2020, UNCONSTRAINED. One file per country, ISO3-keyed.
 #

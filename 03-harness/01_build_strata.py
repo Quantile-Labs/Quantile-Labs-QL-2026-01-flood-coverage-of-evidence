@@ -26,29 +26,27 @@ import geopandas as gpd
 import pandas as pd
 
 STUDY = Path(__file__).resolve().parent.parent
+LIB = STUDY.parent / "_lib"
 INTERIM = STUDY / "02-data" / "interim"
 OUT = INTERIM / "strata"
 META = INTERIM / "metadata"
 GROUPS = INTERIM / "gauge_groups_for_paper" / "dual_lstm"
 BASINS_SHP = INTERIM / "hydrobasins" / "hybas_af_lev12_v1c.shp"
 
+sys.path.insert(0, str(LIB))
+from blind import require_absent          # noqa: E402 — path must be set before the import
+
 # ---------------------------------------------------------------------------------------
 # The blinding assert. Metric tables live inside the manifested tarballs and are never
 # unpacked into the tree; if one ever is, this script must not run until it is understood
-# why. Protocol v1.0 §10, "structural blinding".
+# why. PROTOCOL §10 "structural blinding", amended v1.8.
+#
+# The target is the WHOLE metrics tree, and the check is the shared helper rather than an
+# inline copy. Both of those are corrections: this script previously named two subdirectories
+# that were never extracted, so it guarded nothing from 2026-08-04 to 2026-08-06 while other
+# metric directories sat in the tree. See _lib/blind.py and DECISIONS.md 2026-08-06.
 # ---------------------------------------------------------------------------------------
-_FORBIDDEN = [
-    INTERIM / "metrics" / "return_period_metrics",
-    INTERIM / "metrics" / "hydrograph_metrics" / "per_gauge",
-]
-for _p in _FORBIDDEN:
-    if _p.exists():
-        sys.exit(
-            f"REFUSING TO RUN: {_p} exists.\n"
-            "Strata must be built before any metric value is reachable. Move the metric\n"
-            "tree out of 02-data/interim/ and re-run. If you believe this is a false\n"
-            "positive, log the reason in 07-admin/DECISIONS.md before overriding it."
-        )
+require_absent(INTERIM / "metrics")
 
 # Pre-registered strata cut points (PROTOCOL §8). Fixed here, before any number exists.
 POP_BANDS = [(0, 10_000), (10_000, 100_000), (100_000, 1_000_000), (1_000_000, float("inf"))]
