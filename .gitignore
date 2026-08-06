@@ -1,0 +1,34 @@
+# Ignore rules for this study, written root-relative so they keep working when this
+# directory is published as a repository in its own right.
+#
+# The internal monorepo's .gitignore lives one level up and uses `*/`-prefixed patterns
+# (`*/PLANNING.md`, `*/02-data/raw/**`). Those stop matching the moment this directory
+# becomes the repository root, which would silently un-ignore internal planning and ~700 MB
+# of raw data on the next `git add -A`. This file exists so that cannot happen.
+
+# Internal planning — kept locally, never published.
+PLANNING.md
+PLAN-solo.md
+HANDBOOK.md
+CONTEXT.md
+*.docx
+
+# Raw and interim data never enters version control. Manifests do — provenance is the
+# published artefact, the bytes are not. Every input is re-fetchable from the URL and
+# hash recorded in 02-data/manifests/MANIFEST.csv.
+02-data/raw/**
+02-data/interim/**
+!02-data/**/.gitkeep
+!02-data/manifests/**
+
+# Credentials
+.env
+*.key
+*-service-account*.json
+
+# Noise
+.ipynb_checkpoints/
+__pycache__/
+.DS_Store
+.claude/
+CLAUDE.md

@@ -23,7 +23,7 @@ import geopandas as gpd
 import pandas as pd
 
 STUDY = Path(__file__).resolve().parent.parent
-LIB = STUDY.parent / "_lib"
+LIB = STUDY / "_lib"
 INTERIM = STUDY / "02-data" / "interim"
 OUT = INTERIM / "strata"
 ADM0 = STUDY / "02-data" / "raw" / "geoBoundariesCGAZ_ADM0.gpkg"

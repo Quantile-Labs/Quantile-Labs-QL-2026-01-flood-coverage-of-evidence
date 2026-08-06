@@ -33,7 +33,7 @@ import rasterio
 from rasterio.mask import mask
 
 STUDY = Path(__file__).resolve().parent.parent
-LIB = STUDY.parent / "_lib"
+LIB = STUDY / "_lib"
 INTERIM = STUDY / "02-data" / "interim"
 OUT = INTERIM / "strata"
 SCRATCH = INTERIM / "_scratch_ghs"
