@@ -21,9 +21,13 @@ def resolve(study):
     The published repo has to run from a plain clone, with no sibling directories to find.
     """
     if (ROOT / "00-protocol").is_dir():
-        if ROOT.name == study or ROOT.name.startswith(study):
-            return ROOT
-        raise SystemExit(f"{study!r} does not match the study in this repo ({ROOT.name})")
+        # A single-study repo holds exactly one study, so there is nothing to disambiguate
+        # and the study id is only a label. Deliberately NOT matched against the directory
+        # name: the checkout can be called anything, and it usually is, since the repository
+        # is named Quantile-Labs-QL-2026-01-flood-coverage-of-evidence while the id is
+        # QL-2026-01. An earlier version compared the two and made the README's own verify
+        # command fail on a plain clone, which a clean-clone test caught before publication.
+        return ROOT
     d = ROOT / study
     if d.is_dir():
         return d

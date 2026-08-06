@@ -21,9 +21,9 @@ def resolve(study):
     `_lib/` is vendored inside the study, so ROOT is the study itself.
     """
     if (ROOT / "00-protocol").is_dir():
-        if ROOT.name == study or ROOT.name.startswith(study):
-            return ROOT
-        raise SystemExit(f"{study!r} does not match the study in this repo ({ROOT.name})")
+        # One study per repo, so the id is a label and the checkout directory name is not
+        # matched against it. See the fuller note in manifest.py.
+        return ROOT
     d = ROOT / study
     if d.is_dir():
         return d
