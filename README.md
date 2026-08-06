@@ -53,6 +53,11 @@ protocol v1.8, sha256 `ea0a1ac42f31fd0919f01a82d358e6dda152e79f79fe16f250599b979
   no reference to us or to GitHub.
 - **Software Heritage**, snapshot `swh:1:snp:5918a1abf7ffa5d946009a89a9c8a6be4fa1eed5`,
   archived 2026-08-06, which preserves the entire history independently of GitHub.
+- **Zenodo**, [10.5281/zenodo.21822781](https://doi.org/10.5281/zenodo.21822781), which holds
+  the protocol, its hash file, its timestamp proof, and a full repository archive under a
+  citable DOI. The concept DOI `10.5281/zenodo.21822780` always resolves to the newest
+  version. The deposited `PROTOCOL.md` has been downloaded back from the record and confirmed
+  byte identical to the one in this repository.
 
 **Be clear about what these do and do not establish.** They prove this protocol existed in
 this exact state on 2026-08-06, and they say nothing about the earlier dates, so the freeze
