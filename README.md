@@ -1,4 +1,4 @@
-# QL-2026-01 — Coverage of evidence: Google Flood Hub
+# QL-2026-01: Coverage of evidence, Google Flood Hub
 
 **Type:** Note · **Access tier:** black box · **Status:** pre-registered
 
@@ -6,71 +6,78 @@
 
 How many people live in reach of a river forecast whose accuracy has never been published?
 
-A reanalysis of the developer's own released per-gauge metrics, weighted by population
-exposed and stratified by settlement mapping density.
+This is a reanalysis of the developer's own released per-gauge metrics, weighted by the
+population exposed behind each forecast point, and stratified by settlement mapping density so
+that the answer can be read separately for well mapped and thinly mapped ground.
 
-**This study makes no claim about the model's accuracy anywhere.** Absence of a published
-metric is not evidence of poor skill.
+**This study makes no claim about the model's accuracy anywhere.** The absence of a published
+metric is not evidence of poor skill, and any reader who comes away thinking that unmeasured
+means unreliable has been misled rather than informed.
 
 ## Sources
 
 | Source | Licence |
 |---|---|
-| Zenodo `10.5281/zenodo.10397664` — per-gauge metrics and metadata | CC BY 4.0 |
+| Zenodo `10.5281/zenodo.10397664`, per-gauge metrics and metadata | CC BY 4.0 |
 | WorldPop, 100 m | CC BY 4.0 |
 | OpenStreetMap, via Geofabrik | ODbL |
-| GADM / geoBoundaries | free |
+| GADM and geoBoundaries | free |
 
 ## Verifying the pre-registration yourself
 
-The claim that matters is that the protocol was fixed **before** any metric value was read.
-You do not have to take that on trust.
+The claim that carries the weight of this study is that the protocol was fixed **before** any
+metric value was read, and you do not have to take that claim on trust, because everything
+needed to check it is in this repository.
 
 ```sh
-# The protocol as first frozen, 2026-08-04, before any metric value existed:
+# The protocol as first frozen on 2026-08-04, before any metric value existed:
 git show QL-2026-01-protocol-v1.0:00-protocol/PROTOCOL.md | shasum -a 256
 # -> 52ed62354fe58577c77661de5d20dc92a2991db84ad126d92c375e245efb71da
 
-# The current protocol — same frozen text, with amendments appended to §11:
+# The current protocol, which is the same frozen text with amendments appended to §11:
 shasum -a 256 00-protocol/PROTOCOL.md && cat 00-protocol/PROTOCOL.sha256
 # -> ea0a1ac42f31fd0919f01a82d358e6dda152e79f79fe16f250599b9799664e95
 
-# What changed between any two versions, and when:
+# What changed between any two versions, and when it changed:
 git diff QL-2026-01-protocol-v1.0 QL-2026-01-protocol-v1.8 -- 00-protocol/PROTOCOL.md
 ```
 
 Amendments are **appended** to §11 and the frozen text above it is never edited, so every
-version remains verifiable at its own tag. `07-admin/RUNLOG.md` records every execution and
-`07-admin/DECISIONS.md` every judgement call, both append-only. Where the record is weaker
-than it looks — a reconstructed run-log row, a safeguard that turned out to be inert — it
-says so at the point where it is weaker.
+version of the protocol remains independently verifiable at its own tag. Alongside it,
+`07-admin/RUNLOG.md` records every execution of every script, and `07-admin/DECISIONS.md`
+records every judgement call, every excluded record, and every bug found, both of them append
+only. Where the record is weaker than it first appears, whether that is a run-log row
+reconstructed after the fact or a safeguard that turned out to have been inert, it says so
+plainly at the point where it is weaker rather than leaving you to discover it.
 
 ## Reproducing
 
-Data is not in this repository: raw inputs are ~700 MB and interim products are larger.
-Every input is re-fetchable from the URL and sha256 recorded in
-`02-data/manifests/MANIFEST.csv`, which is the published artefact. Verify what you have with:
+The data itself is not in this repository, because the raw inputs come to roughly 700 MB and
+the interim products are larger still, but every input is re-fetchable from the URL and the
+sha256 recorded in `02-data/manifests/MANIFEST.csv`, which is the artefact this study
+publishes in place of the bytes. You can check whatever you have fetched against it:
 
 ```sh
 python3 _lib/manifest.py QL-2026-01 --verify
 ```
 
-`_lib/` is vendored into this repository so a plain clone runs. Rows marked `transient` were
-hashed on arrival and then deleted by design — the streaming harness never holds more than
-about a gigabyte at once — so they verify as absent rather than as missing.
+The shared helpers in `_lib/` are vendored into this repository so that a plain clone runs
+without any further setup. Rows marked `transient` were hashed on arrival and then deleted by
+design, since the streaming harness never holds more than about a gigabyte on disk at once, so
+those rows are expected to verify as absent rather than to be reported as missing.
 
 ## Progress
 
-- [x] Feasibility check — **passed 2026-08-03.** Per-gauge metrics join to coordinates and a
-      country for 5,678/5,678 gauges globally and 741/741 in Africa.
-- [x] Protocol frozen — **v1.0, 2026-08-04**, sha256 `52ed6235…`, tag
-      `QL-2026-01-protocol-v1.0`. Frozen before any metric value was read. Now at **v1.8**,
-      sha256 `ea0a1ac4…`; all eight versions are tagged.
-- [x] Data acquired and manifested — Zenodo release, HydroBASINS, geoBoundaries, WorldPop,
-      GHS-POP and 51 Geofabrik extracts.
-- [x] Strata frame built **blind** — 230,028 African level-12 basins; all five strata that do
-      not require a metric value are populated.
-- [ ] Analysis — **not started. No metric value has been read.**
+- [x] Feasibility check, **passed 2026-08-03**. Per-gauge metrics join to coordinates and a
+      country for 5,678 of 5,678 gauges globally, and 741 of 741 in Africa.
+- [x] Protocol frozen at **v1.0 on 2026-08-04**, sha256 `52ed6235…`, tag
+      `QL-2026-01-protocol-v1.0`, frozen before any metric value was read. It now stands at
+      **v1.8**, sha256 `ea0a1ac4…`, and all nine versions are tagged.
+- [x] Data acquired and manifested, covering the Zenodo release, HydroBASINS, geoBoundaries,
+      WorldPop, GHS-POP, and 51 Geofabrik extracts.
+- [x] Strata frame built **blind** across 230,028 African level-12 basins, with all five of
+      the strata that do not require a metric value fully populated.
+- [ ] Analysis, **not started, and no metric value has been read**.
 - [ ] Draft
-- [ ] Right of reply — 21 days minimum
+- [ ] Right of reply, 21 days minimum
 - [ ] Published
