@@ -1,0 +1,35 @@
+# Licence
+
+Copyright 2026 Quantile Labs.
+
+Everything in this repository, the protocol, the harness code, the decisions and run logs, and
+the report, is licensed under the Creative Commons Attribution 4.0 International licence.
+
+    SPDX-License-Identifier: CC-BY-4.0
+    Full legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+    Summary: https://creativecommons.org/licenses/by/4.0/
+
+You may copy, redistribute, remix, transform, and build upon this material for any purpose,
+including commercially, provided that you give appropriate credit, link to the licence, and
+indicate whether changes were made.
+
+## What this licence does not cover
+
+**The input data is not in this repository and is not ours to license.** Each source carries
+its own terms, which travel with the data rather than with this repository, and anyone
+reproducing the study takes them on directly:
+
+| Source | Licence |
+|---|---|
+| Zenodo `10.5281/zenodo.10397664`, per-gauge metrics and metadata | CC BY 4.0 |
+| WorldPop, 100 m | CC BY 4.0 |
+| GHS-POP R2023A | CC BY 4.0 |
+| HydroBASINS and HydroSHEDS | see the technical documentation supplied with the release |
+| OpenStreetMap, via Geofabrik | ODbL |
+| geoBoundaries | CC BY 4.0 |
+
+**The OpenStreetMap obligation is the one to watch**, because ODbL is a share-alike licence for
+databases, so anyone who publishes a derived database containing the OSM-derived feature counts
+in `03-harness/03_add_osm.py` may incur share-alike obligations that this licence neither grants
+nor removes. Our own published outputs will state which columns are OSM-derived so that a
+reuser can see exactly what is affected.
