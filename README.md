@@ -61,10 +61,17 @@ publishes in place of the bytes. You can check whatever you have fetched against
 python3 _lib/manifest.py QL-2026-01 --verify
 ```
 
-The shared helpers in `_lib/` are vendored into this repository so that a plain clone runs
-without any further setup. Rows marked `transient` were hashed on arrival and then deleted by
+On a fresh clone, before you have fetched anything, that command reports `0 ok, 0 mismatched,
+7 missing, 187 transient`, and all of those numbers are correct rather than symptoms of a
+problem. The 187 transient rows are inputs that were hashed on arrival and then deleted by
 design, since the streaming harness never holds more than about a gigabyte on disk at once, so
-those rows are expected to verify as absent rather than to be reported as missing.
+they are expected to be absent and are not counted as missing. The 7 missing rows are the
+persistent raw inputs, which are not shipped here for the size reason given above, and they
+turn into `7 ok` once you have fetched them from the URLs recorded in the manifest.
+
+The shared helpers in `_lib/` are vendored into this repository so that a plain clone runs
+without any further setup, and the study identifier passed to the verifier is only a label, so
+it does not matter what you name the directory you clone into.
 
 ## Progress
 
