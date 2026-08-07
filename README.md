@@ -65,11 +65,12 @@ version is anchored at its own tag:
   explorer. `ots info` on the proof shows the attested block heights without either.
 - **Software Heritage**, snapshot `swh:1:snp:5918a1abf7ffa5d946009a89a9c8a6be4fa1eed5`,
   archived 2026-08-06, which preserves the entire history independently of GitHub.
-- **Zenodo**, [10.5281/zenodo.21822781](https://doi.org/10.5281/zenodo.21822781), which holds
-  the protocol, its hash file, its timestamp proof, and a full repository archive under a
-  citable DOI. The concept DOI `10.5281/zenodo.21822780` always resolves to the newest
-  version. The deposited `PROTOCOL.md` has been downloaded back from the record and confirmed
-  byte identical to the one in this repository.
+- **Zenodo**, [10.5281/zenodo.21843331](https://doi.org/10.5281/zenodo.21843331) for v1.9,
+  holding the protocol, its hash file, both timestamp proofs, and a full repository archive
+  under a citable DOI. The concept DOI [10.5281/zenodo.21822780](https://doi.org/10.5281/zenodo.21822780)
+  always resolves to the newest version, and v1.8 remains citable at
+  `10.5281/zenodo.21822781`. The deposited `PROTOCOL.md` has been downloaded back from the
+  record and confirmed byte identical to the one in this repository.
 
 **Be clear about what these do and do not establish.** Each anchor proves the protocol existed
 in that exact state on the day it was made, which is 2026-08-06 for v1.8 and 2026-08-07 for

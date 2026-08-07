@@ -6,7 +6,7 @@ date: <YYYY-MM-DD>
 access_tier: black box
 protocol_hash: b05c0b932ddb9c6db2f192ff5804570197470175e50ed21ce7520839321d2248
 protocol_url: https://github.com/Quantile-Labs/Quantile-Labs-QL-2026-01-flood-coverage-of-evidence
-doi: 10.5281/zenodo.21822781          # this version; concept DOI 10.5281/zenodo.21822780
+doi: 10.5281/zenodo.21843331          # protocol v1.9; concept DOI 10.5281/zenodo.21822780
 licence: CC BY 4.0
 # Anchors, and the limit of what they establish. The protocol hash above is stamped into the
 # Bitcoin blockchain (00-protocol/PROTOCOL.md.ots) and the repository is archived at Software
