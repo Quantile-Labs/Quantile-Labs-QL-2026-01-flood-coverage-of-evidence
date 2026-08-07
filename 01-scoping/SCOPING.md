@@ -148,7 +148,7 @@ The answer to question 5 is unaffected: the study remains publishable whatever i
 
 ---
 
-## Verification — 2026-08-07
+## Verification, 2026-08-07
 
 Appended, not edited. The 2026-08-04 correction above was itself flagged in `DECISIONS.md` as
 needing direct verification against the paper rather than against a summary, because the
