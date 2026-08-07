@@ -32,3 +32,8 @@ __pycache__/
 .DS_Store
 .claude/
 CLAUDE.md
+
+# Permuted dry-run artefacts. The machinery test is reproducible from the seed recorded in
+# DECISIONS.md, and these files must never sit beside real results where a reader could
+# mistake one for the other.
+05-results/*.permuted-*
