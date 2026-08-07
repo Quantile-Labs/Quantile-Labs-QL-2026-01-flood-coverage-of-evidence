@@ -145,3 +145,51 @@ paper's text is the null at the 1-year return period, where the AI model does no
 story considerably, and the Note must be explicit about which one it means every time.
 
 The answer to question 5 is unaffected: the study remains publishable whatever it concludes.
+
+---
+
+## Verification — 2026-08-07
+
+Appended, not edited. The 2026-08-04 correction above was itself flagged in `DECISIONS.md` as
+needing direct verification against the paper rather than against a summary, because the
+"not a rebuttal" posture rests on it. That verification is now done, from two primary sources
+independently: the paper's open-access full text, and the committed cell outputs in the
+manifested repository tarball at commit `1e88caf`.
+
+**The correction above is confirmed, including its negative claim.** Read directly from the
+paper: there is no numeric F1 for Africa anywhere in the main text, there is no per-continent
+table of scores in the text or the Extended Data, Extended Data Table 1 lists metric *types*
+rather than continent results, and Figure 4 is boxplots carrying no printed continent means.
+Every per-continent number therefore exists only in the companion repository's committed cell
+outputs and in what is recomputable from Zenodo, exactly as the correction said.
+
+**The paper says two things about Africa's performance and no more.** The first is qualitative
+and is the load-bearing one for this Note's framing:
+
+> we were able to use AI-based forecasting to improve the skill of forecasts in Africa to be
+> similar to what are currently available in Europe.
+
+The second is in the Figure 4 caption, listing the exceptions to the AI model scoring higher
+everywhere: *"Africa over 1-year return period events (P = 0.07, d = 0.03)"*. Those values match
+cell 27 of `figure_4_continent_reliability_scores_distributions.ipynb` to the precision printed,
+`pvalue=0.06960462965045766` and `0.02812128519231496`, which confirms the 2026-08-04 reading of
+that cell.
+
+**A provenance qualifier the correction above omits, and which the Note must carry.** The
+Figure 4 continent means come from the **1980** datasets and, for the AI model, from the
+**`kfold_splits`** experiment: cell 21 reads `f1s_by_lead_time['glofas_1980']` and cell 23 reads
+`f1s_by_lead_time['google_1980']['kfold_splits']`, both at lead time 0. Our own metric of record
+is `google/2014/dual_lstm/full_run`. **These are different datasets and different experiments,
+so the two sets of numbers are not directly comparable and must never be placed in the same
+column without saying so.** The three-way reporting already required for Q4 exists precisely to
+make the comparable one available.
+
+Figure 4 covers return periods 1.01, 2, 5 and 10 only, `RETURN_PERIODS[:-2]` in cell 25, which
+matches the paper's text discussing 1, 2, 5 and 10-year events and never 20 or 50. The paper's
+"1-year" is the code's `1.01`.
+
+**Noted, not resolved here:** the developer's own notebook contains the test of the Europe
+parity claim, cell 25, "Test Against GloFAS Europe", run for Africa at each return period. Its
+outputs are committed. Whether the recoverable numbers support the sentence quoted above is a
+question this study can answer, and it belongs to Q4 after unblinding rather than to scoping.
+Recorded now so that the question is visibly one we arrived at before seeing our own results.
