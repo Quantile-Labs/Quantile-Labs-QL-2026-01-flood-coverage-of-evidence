@@ -4,7 +4,7 @@ study: QL-2026-01
 type: Note            # Note | Review | Finding
 date: <YYYY-MM-DD>
 access_tier: black box
-protocol_hash: ea0a1ac42f31fd0919f01a82d358e6dda152e79f79fe16f250599b9799664e95
+protocol_hash: b05c0b932ddb9c6db2f192ff5804570197470175e50ed21ce7520839321d2248
 protocol_url: https://github.com/Quantile-Labs/Quantile-Labs-QL-2026-01-flood-coverage-of-evidence
 doi: 10.5281/zenodo.21822781          # this version; concept DOI 10.5281/zenodo.21822780
 licence: CC BY 4.0

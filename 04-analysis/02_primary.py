@@ -120,13 +120,25 @@ def main():
                      "independent": False}
 
     # ---- secondary 1, gauge-count coverage, and Gate F ------------------------------------
+    # Gate F's comparator is rung 2 of the denominator ladder, the real African gauges, fixed
+    # by amendment on 2026-08-07 after a permuted dry run showed the verdict flipping across
+    # all three rungs. Rung 2b includes the 3,682 undocumented `hybas_` entries, which cannot
+    # hold a metric by construction and so depress the count for a reason unconnected to
+    # evidence; rung 1 conditions on holding a metric file and compares the evidence base
+    # against itself. Rung 2 is the only one where both sides can carry evidence. The other
+    # rungs are still printed, because the ladder is reported in full and because a reader
+    # should be able to see what the gate would have said elsewhere.
     n_points = len(points)
     n_ev = int(points["generous"].sum())
     real = points[~points["is_hybas_entry"]]
+    withfile = points[points["has_metric_file"]]
+    n_real, n_real_ev = len(real), int(real["generous"].sum())
     print(f"\nGauge-count coverage, the unweighted comparator")
-    print(f"  all African forecast points   : {fmt(n_ev, n_points)}")
-    print(f"  real gauges only              : {fmt(int(real['generous'].sum()), len(real))}")
-    cov_count = n_ev / n_points if n_points else float("nan")
+    print(f"  rung 2b, all forecast points  : {fmt(n_ev, n_points)}")
+    print(f"  rung 2,  real gauges  [GATE F]: {fmt(n_real_ev, n_real)}")
+    print(f"  rung 1,  gauges with a file   : "
+          f"{fmt(int(withfile['generous'].sum()), len(withfile))}")
+    cov_count = n_real_ev / n_real if n_real else float("nan")
     cov_pop = 1 - out["primary"]["generous__worldpop"]["share"]
     diff_f = 100 * abs(cov_pop - cov_count)
     gate_f = diff_f < GATE_F_PP
@@ -135,22 +147,56 @@ def main():
     print(f"        difference {diff_f:.1f} pp (threshold {GATE_F_PP})")
     print(f"        {'H0 STANDS, the evidence base tracks population closely' if gate_f else 'H0 rejected'}")
     out["secondary_gauge_count_coverage"] = {
-        "evidenced": n_ev, "points": n_points, "coverage": cov_count,
-        "wilson": wilson(n_ev, n_points)}
+        "rung_2b_all_points": {"evidenced": n_ev, "n": n_points,
+                               "coverage": n_ev / n_points, "wilson": wilson(n_ev, n_points)},
+        "rung_2_real_gauges": {"evidenced": n_real_ev, "n": n_real, "coverage": cov_count,
+                               "wilson": wilson(n_real_ev, n_real), "gate_f_comparator": True},
+        "rung_1_with_file": {"evidenced": int(withfile["generous"].sum()),
+                             "n": int(len(withfile)),
+                             "coverage": float(withfile["generous"].mean())}}
     out["gate_f"] = {"difference_pp": diff_f, "threshold_pp": GATE_F_PP,
+                     "comparator_rung": 2, "comparator_n": n_real,
                      "coverage_population": cov_pop, "coverage_gauge_count": cov_count,
                      "verdict": "null_stands" if gate_f else "null_rejected"}
 
     # ---- secondary 3, coverage by mapping-density tercile ---------------------------------
-    print("\nP_unevidenced by OSM mapping-density tercile")
+    # The floor column is binding (amendment 2026-08-07). It is P_unevidenced if every gauge
+    # holding a metric file turned out to be evidenced, so it isolates the part of the gradient
+    # driven purely by which points have a file at all, which permutation does not touch and
+    # which is a property of the release rather than of its contents. Published bare, the
+    # tercile gradient invites attribution to the wrong mechanism, and the correction would
+    # never catch up with the headline. The column costs nothing.
+    print("\nP_unevidenced by OSM mapping-density tercile, with its structural floor")
+    print(f"  {'tercile':<12}{'P_unev':>9}{'floor':>9}{'attributable':>14}"
+          f"{'pop in reach':>16}{'basins':>9}")
     tercile = {}
     for t in ["T1_sparse", "T2", "T3_dense"]:
         sub = basins[basins["osm_density_tercile"] == t]
         share, num, den, bn, bd = p_unevidenced(sub, "evidenced_generous", "pop_worldpop")
-        tercile[t] = {"share": share, "numerator_pop": num, "denominator_pop": den,
-                      "basins_in_reach": bd}
-        print(f"  {t:<12}{100*share:>8.1f}%   pop in reach {den:>15,.0f}   basins {bd:>7,}")
+        m = (sub["points"] > 0) & sub["pop_worldpop"].notna()
+        floor = (float(sub.loc[m & (sub["points_with_file"] == 0), "pop_worldpop"].sum()) / den
+                 if den else float("nan"))
+        tercile[t] = {"share": share, "structural_floor": floor,
+                      "attributable_to_null_content_pp": 100 * (share - floor),
+                      "numerator_pop": num, "denominator_pop": den, "basins_in_reach": bd}
+        print(f"  {t:<12}{100*share:>8.1f}%{100*floor:>8.1f}%"
+              f"{100*(share-floor):>13.1f}pp{den:>16,.0f}{bd:>9,}")
     out["secondary_by_tercile"] = tercile
+    print("  'floor' is P_unevidenced if every gauge holding a metric file were evidenced,")
+    print("  so 'attributable' is the only part the metric contents decide.")
+
+    # The same decomposition for the headline, also binding.
+    mall = (basins["points"] > 0) & basins["pop_worldpop"].notna()
+    den_all = float(basins.loc[mall, "pop_worldpop"].sum())
+    floor_all = float(basins.loc[mall & (basins["points_with_file"] == 0),
+                                 "pop_worldpop"].sum()) / den_all
+    out["structural_floor"] = {
+        "share": floor_all, "population_in_reach": den_all,
+        "population_with_no_filed_gauge_in_reach": floor_all * den_all,
+        "band_pp": 100 * (1 - floor_all)}
+    print(f"\nStructural floor of the primary metric: {100*floor_all:.1f}%")
+    print(f"  P_unevidenced is confined to [{100*floor_all:.1f}%, 100.0%] by file presence")
+    print(f"  alone, a {100*(1-floor_all):.1f} pp band, before any metric value is read.")
 
     # ---- secondary 4, country table -------------------------------------------------------
     rows = []

@@ -36,21 +36,33 @@ git show QL-2026-01-protocol-v1.0:00-protocol/PROTOCOL.md | shasum -a 256
 
 # The current protocol, which is the same frozen text with amendments appended to §11:
 shasum -a 256 00-protocol/PROTOCOL.md && cat 00-protocol/PROTOCOL.sha256
-# -> ea0a1ac42f31fd0919f01a82d358e6dda152e79f79fe16f250599b9799664e95
+# -> b05c0b932ddb9c6db2f192ff5804570197470175e50ed21ce7520839321d2248
 
 # What changed between any two versions, and when it changed:
-git diff QL-2026-01-protocol-v1.0 QL-2026-01-protocol-v1.8 -- 00-protocol/PROTOCOL.md
+git diff QL-2026-01-protocol-v1.0 QL-2026-01-protocol-v1.9 -- 00-protocol/PROTOCOL.md
 ```
 
 ### Independent anchors, which do not rely on this repository
 
 Git commit and tag dates are set by whoever makes the commit, so they are self-asserted and a
-reader is right to discount them. Two anchors outside our control fix that, and both cover
-protocol v1.8, sha256 `ea0a1ac42f31fd0919f01a82d358e6dda152e79f79fe16f250599b9799664e95`:
+reader is right to discount them. Three anchors outside our control fix that. They cover
+**protocol v1.9, sha256
+`b05c0b932ddb9c6db2f192ff5804570197470175e50ed21ce7520839321d2248`**, and every earlier
+version is anchored at its own tag:
 
-- **OpenTimestamps**, `00-protocol/PROTOCOL.md.ots`, which anchors that hash into the Bitcoin
-  blockchain and can be checked with `ots verify 00-protocol/PROTOCOL.md.ots` by anyone, with
-  no reference to us or to GitHub.
+- **OpenTimestamps**, in `00-protocol/timestamps/`, one proof per protocol version, which
+  anchors each version's hash into the Bitcoin blockchain with no reference to us or to
+  GitHub. The v1.8 proof is confirmed in **blocks 961285, 961287, 961288 and 961333**. Each
+  proof covers the protocol text at its own tag rather than the current file, so verify it
+  against that text:
+
+  ```sh
+  git show QL-2026-01-protocol-v1.8:00-protocol/PROTOCOL.md > /tmp/v1.8.md
+  ots verify -f /tmp/v1.8.md 00-protocol/timestamps/PROTOCOL.v1.8.md.ots
+  ```
+
+  Full verification reads the Bitcoin block headers, so it wants a local node or a block
+  explorer. `ots info` on the proof shows the attested block heights without either.
 - **Software Heritage**, snapshot `swh:1:snp:5918a1abf7ffa5d946009a89a9c8a6be4fa1eed5`,
   archived 2026-08-06, which preserves the entire history independently of GitHub.
 - **Zenodo**, [10.5281/zenodo.21822781](https://doi.org/10.5281/zenodo.21822781), which holds
@@ -59,11 +71,12 @@ protocol v1.8, sha256 `ea0a1ac42f31fd0919f01a82d358e6dda152e79f79fe16f250599b979
   version. The deposited `PROTOCOL.md` has been downloaded back from the record and confirmed
   byte identical to the one in this repository.
 
-**Be clear about what these do and do not establish.** They prove this protocol existed in
-this exact state on 2026-08-06, and they say nothing about the earlier dates, so the freeze
-date of 2026-08-04 recorded against v1.0 rests on this repository's own record and should be
-read as our claim rather than as an attested fact. What matters for the study is unaffected,
-because the anchor still lands before any metric value has been read, and none has been.
+**Be clear about what these do and do not establish.** Each anchor proves the protocol existed
+in that exact state on the day it was made, which is 2026-08-06 for v1.8 and 2026-08-07 for
+v1.9, and says nothing whatever about any earlier date. The freeze date of 2026-08-04 recorded
+against v1.0 therefore rests on this repository's own record and should be read as our claim
+rather than as an attested fact. What matters for the study is unaffected, because the anchors
+still land before any metric value has been read, and none has been.
 
 Amendments are **appended** to §11 and the frozen text above it is never edited, so every
 version of the protocol remains independently verifiable at its own tag. Alongside it,
@@ -102,7 +115,7 @@ it does not matter what you name the directory you clone into.
       country for 5,678 of 5,678 gauges globally, and 741 of 741 in Africa.
 - [x] Protocol frozen at **v1.0 on 2026-08-04**, sha256 `52ed6235…`, tag
       `QL-2026-01-protocol-v1.0`, frozen before any metric value was read. It now stands at
-      **v1.8**, sha256 `ea0a1ac4…`, and all nine versions are tagged.
+      **v1.9**, sha256 `b05c0b93…`, and all ten versions are tagged.
 - [x] Data acquired and manifested, covering the Zenodo release, HydroBASINS, geoBoundaries,
       WorldPop, GHS-POP, and 51 Geofabrik extracts.
 - [x] Strata frame built **blind** across 230,028 African level-12 basins, with all five of
