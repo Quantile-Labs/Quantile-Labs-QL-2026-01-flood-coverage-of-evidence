@@ -159,6 +159,33 @@ def main():
                      "coverage_population": cov_pop, "coverage_gauge_count": cov_count,
                      "verdict": "null_stands" if gate_f else "null_rejected"}
 
+    # ---- the denominator ladder, primary metric at every rung -----------------------------
+    # Required by the 2026-08-04 amendment: the ladder is reported in full and the primary
+    # metric is computed at each rung, because a single denominator was always going to be the
+    # weakest joint in this Note and Gate H established that no single one is defensible. The
+    # ladder is stronger than a choice: it shows exactly how the answer depends on what you
+    # count, and it removes the temptation to pick the rung that gives the best number.
+    # "In reach" narrows with each rung, so both numerator and denominator move together.
+    print("\nPrimary metric at every rung of the denominator ladder")
+    print(f"  {'rung':<44}{'basins':>9}{'pop in reach':>16}{'P_unev':>9}")
+    ladder = {}
+    rungs = [("rung 1, basins holding an evaluated gauge", basins["points_with_file"] > 0),
+             ("rung 2, basins holding a real gauge", basins["real_points"] > 0),
+             ("rung 2b, basins holding any inventory point", basins["points"] > 0),
+             ("rung 3, all study-region basins", basins["in_study_region"].astype(bool))]
+    for name, mask in rungs:
+        sub = basins[mask]
+        m = sub["pop_worldpop"].notna()
+        den = float(sub.loc[m, "pop_worldpop"].sum())
+        num = float(sub.loc[m & (sub["evidenced_generous"] == 0), "pop_worldpop"].sum())
+        share = num / den if den else float("nan")
+        ladder[name] = {"basins": int(mask.sum()), "population": den, "p_unevidenced": share}
+        print(f"  {name:<44}{int(mask.sum()):>9,}{den:>16,.0f}{100*share:>8.1f}%")
+    ladder["rung 4, product display surface"] = None
+    print("  rung 4, the product display surface, is not enumerable from any released")
+    print("  artefact and is therefore never used as our denominator.")
+    out["denominator_ladder"] = ladder
+
     # ---- secondary 3, coverage by mapping-density tercile ---------------------------------
     # The floor column is binding (amendment 2026-08-07). It is P_unevidenced if every gauge
     # holding a metric file turned out to be evidenced, so it isolates the part of the gradient
