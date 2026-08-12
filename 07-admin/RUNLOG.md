@@ -46,10 +46,21 @@ outcomes. A re-run after a post-unblinding bug fix gets its own row with the rea
 > and it is recorded here so it is visible as a choice. **It does not extend to the authorised
 > run**, which gets a row per invocation with no exceptions.
 
+| 2026-08-12T22:38:45Z | `04-analysis/01_evidence.py --unblind` | 884db25, file sha256 `2a6c86df1560` | metrics.tgz `237559b9abbe` · basins_af.parquet · points_assigned.csv | **UNBLINDED** | `basins_evidence.parquet` `60dea4460ee1` · `points_evidence.csv` `97d4b3041bc4` · `evidence_summary.json` `e761fdb95b07` | **The single authorised run.** All 7 preconditions passed. 3,378 of 5,678 gauges evidenced globally; 2,300 file-present-but-all-null; **242 of 741 African gauges with a metric file are evidenced**. Marker written to `07-admin/UNBLINDED.json`. |
+| 2026-08-12T22:39:—Z | `04-analysis/02_primary.py --unblind` | 884db25, file sha256 `ea47288b738b` | `basins_evidence.parquet` `60dea4460ee1` | **UNBLINDED** | `primary.json` `1d09322b25be` · `country_table.csv` `f498267f3260` | **P_unevidenced = 92.4%** on WorldPop under the frozen generous definition. Gate D 1.6 pp, headline permitted. Gate E 0.4 pp, within tolerance. Gate F 0.3 pp, **H0 stands**. |
+| 2026-08-12T22:40:—Z | `04-analysis/03_q4_skill.py --unblind` | 884db25, file sha256 `3349ab0b7201` | metrics.tgz `237559b9abbe` · basins_af.parquet · points_assigned.csv | **UNBLINDED** | `q4_skill.json` `c538ddb0e1bb` | Q4 across six experiment-year combinations plus the window sensitivity. No experiment designated the headline. |
+
 ## Unblinding record
 
-- **Date (UTC):**
-- **Frozen analysis SHA:**
-- **Protocol hash at time of run:**
-- **Authorised by:**
+- **Date (UTC):** 2026-08-12T22:38:45Z
+- **Frozen analysis SHA:** `884db25a1ac55451b51949ca46ff07aac7aa8ceb`
+- **Protocol hash at time of run:** `b05c0b932ddb9c6db2f192ff5804570197470175e50ed21ce7520839321d2248` (v1.9,
+  tag `QL-2026-01-protocol-v1.9`, anchored in Bitcoin and at Zenodo `10.5281/zenodo.21843331`
+  before the run)
+- **Authorised by:** Quantile Labs
+- **Preconditions:** 7 of 7 passed, checked immediately before the run and recorded in
+  `04-analysis/_metrics_io.py --check`
+- **Prior blind development:** the full pipeline was built and exercised against permuted
+  labels (seed 20260806) across 2026-08-07 and 2026-08-08, per §10. Three defects were found
+  and fixed while blind, three of which became protocol v1.9 amendments.
 - **Post-unblinding changes:** *(none, or each with date, reason and new SHA)*

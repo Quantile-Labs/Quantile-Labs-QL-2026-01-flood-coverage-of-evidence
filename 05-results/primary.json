@@ -1,0 +1,152 @@
+{
+  "mode": "unblind",
+  "seed": null,
+  "primary": {
+    "generous__worldpop": {
+      "share": 0.9242618610192087,
+      "numerator_pop": 65852419.98060926,
+      "denominator_pop": 71248660.96713328,
+      "basins_numerator": 5478,
+      "basins_denominator": 5720
+    },
+    "generous__ghspop": {
+      "share": 0.9202687401882741,
+      "numerator_pop": 67060945.32155196,
+      "denominator_pop": 72871045.5902612,
+      "basins_numerator": 5184,
+      "basins_denominator": 5409
+    },
+    "rp2__worldpop": {
+      "share": 0.9242618610192087,
+      "numerator_pop": 65852419.98060926,
+      "denominator_pop": 71248660.96713328,
+      "basins_numerator": 5478,
+      "basins_denominator": 5720
+    },
+    "rp2__ghspop": {
+      "share": 0.9202687401882741,
+      "numerator_pop": 67060945.32155196,
+      "denominator_pop": 72871045.5902612,
+      "basins_numerator": 5184,
+      "basins_denominator": 5409
+    },
+    "rp5__worldpop": {
+      "share": 0.9405495248453695,
+      "numerator_pop": 67012894.21850603,
+      "denominator_pop": 71248660.96713328,
+      "basins_numerator": 5494,
+      "basins_denominator": 5720
+    },
+    "rp5__ghspop": {
+      "share": 0.9385058451831607,
+      "numerator_pop": 68389902.23106873,
+      "denominator_pop": 72871045.5902612,
+      "basins_numerator": 5200,
+      "basins_denominator": 5409
+    }
+  },
+  "basins_in_reach_without_population": 14,
+  "gate_d": {
+    "spread_pp": 1.6287663826160759,
+    "threshold_pp": 10.0,
+    "verdict": "headline_permitted"
+  },
+  "gate_e": {
+    "spread_pp": 0.39931208309346156,
+    "threshold_pp": 5.0,
+    "verdict": "within_tolerance",
+    "independent": false
+  },
+  "secondary_gauge_count_coverage": {
+    "rung_2b_all_points": {
+      "evidenced": 242,
+      "n": 6772,
+      "coverage": 0.03573538098050797,
+      "wilson": [
+        0.03573538098050797,
+        0.0315707728074542,
+        0.040426423821227325
+      ]
+    },
+    "rung_2_real_gauges": {
+      "evidenced": 242,
+      "n": 3090,
+      "coverage": 0.07831715210355987,
+      "wilson": [
+        0.07831715210355987,
+        0.06935898244776396,
+        0.0883225226428651
+      ],
+      "gate_f_comparator": true
+    },
+    "rung_1_with_file": {
+      "evidenced": 242,
+      "n": 741,
+      "coverage": 0.3265856950067476
+    }
+  },
+  "gate_f": {
+    "difference_pp": 0.2579013122768578,
+    "threshold_pp": 5.0,
+    "comparator_rung": 2,
+    "comparator_n": 3090,
+    "coverage_population": 0.07573813898079129,
+    "coverage_gauge_count": 0.07831715210355987,
+    "verdict": "null_stands"
+  },
+  "denominator_ladder": {
+    "rung 1, basins holding an evaluated gauge": {
+      "basins": 741,
+      "population": 16014565.284777021,
+      "p_unevidenced": 0.6630416817087426
+    },
+    "rung 2, basins holding a real gauge": {
+      "basins": 2123,
+      "population": 51178146.781288564,
+      "p_unevidenced": 0.8945596641163067
+    },
+    "rung 2b, basins holding any inventory point": {
+      "basins": 5734,
+      "population": 71248660.96713328,
+      "p_unevidenced": 0.9242618610192087
+    },
+    "rung 3, all study-region basins": {
+      "basins": 229744,
+      "population": 1319838500.2369719,
+      "p_unevidenced": 0.995911438417992
+    },
+    "rung 4, product display surface": null
+  },
+  "secondary_by_tercile": {
+    "T1_sparse": {
+      "share": 0.9999788434276493,
+      "structural_floor": 0.992978513530368,
+      "attributable_to_null_content_pp": 0.7000329897281277,
+      "numerator_pop": 915329.2579259279,
+      "denominator_pop": 915348.6235653084,
+      "basins_in_reach": 788
+    },
+    "T2": {
+      "share": 0.9983433605624481,
+      "structural_floor": 0.9552584541331232,
+      "attributable_to_null_content_pp": 4.308490642932494,
+      "numerator_pop": 5183890.062613778,
+      "denominator_pop": 5192492.149888461,
+      "basins_in_reach": 1659
+    },
+    "T3_dense": {
+      "share": 0.9172927280069357,
+      "structural_floor": 0.7578197817557611,
+      "attributable_to_null_content_pp": 15.947294625117458,
+      "numerator_pop": 59753200.660069555,
+      "denominator_pop": 65140820.1936795,
+      "basins_in_reach": 3273
+    }
+  },
+  "structural_floor": {
+    "share": 0.7752299472383841,
+    "population_in_reach": 71248660.96713328,
+    "population_with_no_filed_gauge_in_reach": 55234095.68235625,
+    "band_pp": 22.477005276161588
+  }
+}

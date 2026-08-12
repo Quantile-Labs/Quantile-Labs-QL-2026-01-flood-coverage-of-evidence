@@ -1,0 +1,11 @@
+{
+  "runs": [
+    {
+      "utc": "2026-08-12T22:38:45Z",
+      "frozen_analysis_sha": "884db25a1ac55451b51949ca46ff07aac7aa8ceb",
+      "protocol_sha256": "b05c0b932ddb9c6db2f192ff5804570197470175e50ed21ce7520839321d2248",
+      "frozen_path": "metrics/return_period_metrics/google/2014/dual_lstm/full_run/",
+      "reason": "first authorised run"
+    }
+  ]
+}
