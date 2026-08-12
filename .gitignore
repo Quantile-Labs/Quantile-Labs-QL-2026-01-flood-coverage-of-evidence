@@ -37,3 +37,7 @@ CLAUDE.md
 # DECISIONS.md, and these files must never sit beside real results where a reader could
 # mistake one for the other.
 05-results/*.permuted-*
+
+# ots upgrade writes a .bak of the pre-upgrade proof. The upgraded proof supersedes it
+# and the old one verifies as pending, so publishing it can only confuse a reader.
+*.ots.bak
