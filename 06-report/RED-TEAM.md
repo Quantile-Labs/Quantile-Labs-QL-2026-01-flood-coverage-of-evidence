@@ -257,3 +257,19 @@ makes this work possible becomes harder for every study after it.
 5. **Ask two hydrologists to break it before the right of reply, not after.** Costs social
    capital only, and the failure mode above is precisely the kind a domain reader catches in
    ten minutes and a careful non-specialist never does.
+
+---
+
+## Claim-ladder pass, 2026-08-12
+
+Run against the first full draft, recorded in `CLAIM-LADDER.md`. Four rung violations found and
+fixed, of which **§2 of this document was the one the draft had failed entirely**: the historical
+gauge network, named here in week one as the most defensible alternative explanation and
+pre-committed in PROTOCOL §11 to appear in the abstract if coverage tracked it, appeared nowhere
+in the draft. Coverage tracks it emphatically, with all 741 African gauges holding a metric file
+being GRDC stations and 87.2% of evidenced points sitting in South Africa.
+
+The prediction written here in week one was that *"a reader who takes our map as an indictment of
+the developer has misread it, and if the Note lets them, the Note is at fault, not the reader."*
+The draft was letting them. The pre-mortem worked exactly as intended, six weeks after it was
+written, against a draft its author had already read twice without noticing.

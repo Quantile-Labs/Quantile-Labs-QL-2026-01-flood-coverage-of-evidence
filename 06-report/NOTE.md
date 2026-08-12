@@ -27,14 +27,30 @@ independently before the analysis was run.
 **Conflicts:** none declared, see `CONFLICTS.md`.
 
 This Note reports what the published record contains, and it makes no claim about how well the
-model works anywhere. Three things need saying at the top rather than being left to a box at the
+model works anywhere. Four things need saying at the top rather than being left to a box at the
 bottom, because by the time a reader reaches a limits box they have already formed the view the
-headline gave them. The absence of a published metric is not evidence of poor skill, and a reader
-who finishes this Note believing that unmeasured means unreliable has been misled by us rather
-than informed. Google may well have evaluated performance at every one of the locations we
-describe as carrying no published value, since internal work is invisible to a black-box study by
-definition, so our subject throughout is what was *published* and never what was *measured*. And
-if the developer responds by publishing coverage figures that supersede ours, that is not a
+headline gave them.
+
+The absence of a published metric is not evidence of poor skill, and a reader who finishes this
+Note believing that unmeasured means unreliable has been misled by us rather than informed.
+Google may well have evaluated performance at every one of the locations we describe as carrying
+no published value, since internal work is invisible to a black-box study by definition, so our
+subject throughout is what was *published* and never what was *measured*.
+
+**Coverage of the published evidence base tracks the historical gauge network, and that network
+is not the developer's doing.** Every one of the 741 African gauges carrying a metric file comes
+from the Global Runoff Data Centre archive, and 211 of the 242 evidenced points, which is 87.2%,
+lie in South Africa. Per-gauge metrics can exist only where a usable observational record exists,
+and the African record was assembled over a century by national hydrological services through
+colonial administration, war, structural adjustment, and drought. Where our maps look sparse,
+the most defensible reading is that this is where the gauges are, and anyone taking the pattern
+below as an indictment of Google has misread it.
+
+We did not look at the Flood Hub product. There is no screenshot here, no gauge list pulled from
+the service, and no API call, because the API requires approval and serves no history, so a
+black-box reanalysis of the released artefacts is what this is and all it is.
+
+If the developer responds by publishing coverage figures that supersede ours, that is not a
 rebuttal we intend to resist, it is the outcome we would most like this Note to produce.
 
 > ### Limits of this claim
@@ -102,8 +118,8 @@ after unblinding would have meant choosing the denominator with the answer alrea
 7.6%, and unweighted coverage across the same 3,090 real African gauges is 7.8%, a difference of
 0.26 percentage points against a pre-registered threshold of five. The evidence base tracks
 population closely, and there is no support in these data for the concern that published
-evaluation is scarcer where more people are exposed. That concern is widely held and, as far as
-we can establish, had not previously been tested.
+evaluation is scarcer where more people are exposed. We pre-registered that concern as our
+hypothesis and found against it, which is the result reported here.
 
 Against that, the absolute level is low. Of the 71,248,661 people living in reach of any forecast
 point in the published African inventory, 65,852,420, which is **92.4%**, live in reach of none
@@ -171,6 +187,29 @@ This finding concerns publication and not performance. It says that African gaug
 evaluated more often carry no released value, and it says nothing about how those gauges would
 score if a value existed.
 
+### The pattern follows the gauge archive, which predates the model by a century
+
+Every one of the 741 African gauges holding a metric file is a Global Runoff Data Centre
+station, and the evidenced points among them are concentrated to a degree that makes the
+geography of this Note largely a geography of that archive.
+
+| Country | Evidenced points | Forecast points in inventory | Share of all evidenced points in Africa |
+|---|---:|---:|---:|
+| South Africa | 211 | 1,718 | 87.2% |
+| Liberia | 8 | 17 | 3.3% |
+| Namibia | 6 | 157 | 2.5% |
+| Guinea | 4 | 100 | 1.7% |
+| Lesotho | 3 | 47 | 1.2% |
+| Angola | 3 | 611 | 1.2% |
+
+A per-gauge metric can exist only where there is a gauge with a usable observational record to
+evaluate against, so the ceiling on published evidence in any country was set by hydrological
+infrastructure long before any model was trained. We can report this association and we cannot
+attribute its cause, because cause is a mechanism claim and mechanism is unavailable at a
+black-box tier. What we can say is that the alternative explanation is strong, that it is not a
+decision by the developer, and that it accounts for the geography at least as well as anything
+about how the evaluation set was chosen.
+
 ### Published skill, weighted by the people behind it
 
 Among African gauges that do carry published values, skill can be examined with each gauge
@@ -213,6 +252,15 @@ reportable observation, so we report it rather than resolving it by assumption.
 It does not establish that coverage is worse where people are. Our own pre-registered test found
 the opposite, and any reading of the 92.4% figure implying otherwise is contradicted by the
 result printed immediately above it.
+
+It does not establish why the evaluation set falls where it does. We can show that it follows
+the Global Runoff Data Centre archive and we cannot show what produced that archive's shape,
+which is a question about a century of hydrological infrastructure rather than about a model.
+Nothing here supports treating the distribution as a choice anyone at Google made.
+
+It does not establish that no metric has ever been published for these locations. It establishes
+that the artefacts named at the top of this Note contain none, and we did not survey everything
+the developer has ever released.
 
 ## Reproduction
 
