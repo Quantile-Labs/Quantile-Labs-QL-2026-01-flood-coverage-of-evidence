@@ -46,7 +46,7 @@ was computed*.
 
 | Sentence, abbreviated | Rung | Note |
 |---|---|---|
-| Title, "thin nearly everywhere, and no thinner where more people live" | A | Both halves are measured quantities. The second is Gate F at 0.26 pp. |
+| Title, a noun phrase naming the object of study | A | Asserts nothing, so it cannot overreach. The finding moves to the standfirst beneath it, which is rung A: Gate F at 0.26 pp and the 92.4% share. |
 | Population-weighted coverage 7.6% against gauge-count 7.8% | A | Primary comparison, pre-registered threshold. |
 | 92.4% of 71,248,661 people in reach carry no published metric | A | Frozen definition, denominator on the figure. |
 | Moves to 94.1% under the strictest definition, spread 1.6 pp | A | Pre-registered sensitivity. |

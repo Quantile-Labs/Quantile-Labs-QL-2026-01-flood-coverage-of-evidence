@@ -1,5 +1,5 @@
 ---
-title: "Africa's published flood-forecast evidence base is thin nearly everywhere, and no thinner where more people live"
+title: "Population-weighted coverage of published flood-forecast evaluation in Africa"
 study: QL-2026-01
 type: Note            # Note | Review | Finding
 date: 2026-08-12
@@ -15,7 +15,11 @@ licence: CC BY 4.0
 # freeze recorded against protocol v1.0 is our own record rather than an attested fact.
 ---
 
-# Africa's published flood-forecast evidence base is thin nearly everywhere, and no thinner where more people live
+# Population-weighted coverage of published flood-forecast evaluation in Africa
+
+*Coverage of the published evidence base tracks population closely, and 92.4% of the people
+in reach of an African forecast point are in reach of none carrying a published per-gauge
+metric.*
 
 **Access tier:** black box, so we queried no system and can say nothing about how Flood Hub
 behaves today, only about what the 2024 release published.
