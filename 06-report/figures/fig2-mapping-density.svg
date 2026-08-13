@@ -40,5 +40,5 @@
 <text x="208" y="218" font-size="12" fill="#ffffff" font-weight="600">75.8%</text>
 <text x="593.262945762913" y="218" class="t1" font-size="12.5" font-weight="600">91.7%</text>
 <line x1="200" y1="82" x2="200" y2="236" class="axis"/>
-<text x="0" y="276" class="tm" font-size="11">Blue is where no gauge holds a metric file at all. Only the orange remainder was decided by what the published metrics say.</text>
+<text x="0" y="276" class="tm" font-size="11">Blue is where no gauge holds a metric file at all, so only the orange remainder was decided by what the published metrics say.</text>
 </svg>

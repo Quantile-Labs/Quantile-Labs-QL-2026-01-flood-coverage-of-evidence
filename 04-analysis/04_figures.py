@@ -6,16 +6,17 @@ Reads `05-results/` and writes `06-report/figures/`. It reads no metric table, s
 after unblinding without touching the outcome again, and every number it draws is one a reader
 can find in the machine-readable results beside it.
 
-WHY SVG AND WHY STATIC. The Note is a document rather than a dashboard, and it has to survive
+WHY SVG AND WHY STATIC. The Note is a document and not a dashboard, and it has to survive
 being printed, archived at Software Heritage, and read from a git diff six years from now. SVG
-is text, so a figure changing is a reviewable diff rather than an opaque binary swap. The
+is text, so a figure changing shows up as a reviewable diff and not an opaque binary swap. The
 visualisation guidance ships a hover layer by default for HTML and SVG charts, and that default
-is declined here deliberately: there is no interaction to offer a reader of a static document,
+is declined here on purpose, since there is no interaction to offer a reader of a static
+document,
 and a tooltip that never appears is worse than a direct label that always does. Every value a
 tooltip would have carried is printed on the mark instead.
 
 COLOUR. Palette slots and ink tokens are the reference instance, validated with the supplied
-checker rather than by eye. The two-segment stack uses categorical slots 1 and 2, which pass
+checker instead of by eye. The two-segment stack uses categorical slots 1 and 2, which pass
 every gate in both modes. The country figure uses the emphasis form, one accent hue against
 de-emphasis gray, where the checker's chroma floor reports a fail on the gray: that check is
 scoped to categorical palettes, in which every slot must read as a distinct hue, and emphasis is
@@ -99,7 +100,7 @@ def fig_gate_f(p):
     yb = top + 2 * (bh + gap) - gap + 6
     b.append(f'<line x1="{x0}" y1="{top-6}" x2="{x0}" y2="{yb}" class="axis"/>')
     b.append(f'<text x="{x0}" y="{yb+18}" class="tm" font-size="11">'
-             f'Difference 0.26 pp. Gate F rejects the null only above 5 pp, so the null stands.'
+             f'Difference 0.26 pp, where Gate F rejects the null only above 5 pp, so the null stands.'
              f'</text>')
     return svg("\n".join(b), yb + 30,
                "Coverage of the published evidence base does not depend on population",
@@ -142,7 +143,7 @@ def fig_density(p):
     return svg("\n".join(b), yb + 26,
                "Most of the mapping-density gradient was settled before any value was read",
                "Population in reach of no evidenced forecast point, split by what fixed it",
-               "Blue is where no gauge holds a metric file at all. Only the orange remainder "
+               "Blue is where no gauge holds a metric file at all, so only the orange remainder "
                "was decided by what the published metrics say.")
 
 
@@ -171,8 +172,8 @@ def fig_archive(c):
                "The published evidence base follows a century-old gauge archive",
                "Share of all 242 evidenced African forecast points, by country, with the "
                "population in reach of each country's points",
-               "All 741 African gauges holding a metric file are GRDC stations. We report the "
-               "association and cannot attribute its cause.")
+               "All 741 African gauges holding a metric file are GRDC stations, and we report the "
+               "association without attributing its cause.")
 
 
 def fig_ladder(p):

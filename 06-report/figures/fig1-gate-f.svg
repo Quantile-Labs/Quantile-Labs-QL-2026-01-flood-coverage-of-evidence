@@ -24,5 +24,5 @@
 <path class="c1" d="M250.0 114 H494.0 a4 4 0 0 1 4 4 V140 a4 4 0 0 1 -4 4 H250.0 Z"/>
 <text x="506.00431499460626" y="134" class="t1" font-size="13" font-weight="600">7.8%</text>
 <line x1="250" y1="56" x2="250" y2="150" class="axis"/>
-<text x="250" y="168" class="tm" font-size="11">Difference 0.26 pp. Gate F rejects the null only above 5 pp, so the null stands.</text>
+<text x="250" y="168" class="tm" font-size="11">Difference 0.26 pp, where Gate F rejects the null only above 5 pp, so the null stands.</text>
 </svg>
