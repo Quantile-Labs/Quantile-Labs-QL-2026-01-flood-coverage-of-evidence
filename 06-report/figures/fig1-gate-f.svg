@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="180" viewBox="0 0 760 180" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' role="img" aria-label="Coverage of the published evidence base does not depend on population. Share of African forecast points carrying a published per-gauge metric, two ways of counting">
+<style>
+  .s  { fill: #fcfcfb }
+  .t1 { fill: #0b0b0b } .t2 { fill: #52514e } .tm { fill: #898781 }
+  .grid  { stroke: #e1e0d9; stroke-width: 1 }
+  .axis  { stroke: #c3c2b7; stroke-width: 1 }
+  .c1 { fill: #2a78d6 } .c2 { fill: #eb6834 } .cg { fill: #898781 }
+  .gap { stroke: #fcfcfb; stroke-width: 2 }
+  @media (prefers-color-scheme: dark) {
+    .s  { fill: #1a1a19 }
+    .t1 { fill: #ffffff } .t2 { fill: #c3c2b7 }
+    .grid { stroke: #2c2c2a } .axis { stroke: #383835 }
+    .c1 { fill: #3987e5 } .c2 { fill: #d95926 }
+    .gap { stroke: #1a1a19 }
+  }
+</style>
+<rect width="760" height="180" class="s"/>
+<text x="0" y="18" class="t1" font-size="15" font-weight="600">Coverage of the published evidence base does not depend on population</text>
+<text x="0" y="38" class="t2" font-size="12.5">Share of African forecast points carrying a published per-gauge metric, two ways of counting</text>
+<text x="238" y="82" class="t2" font-size="12.5" text-anchor="end">Weighted by population in reach</text>
+<path class="c1" d="M250.0 62 H485.8 a4 4 0 0 1 4 4 V88 a4 4 0 0 1 -4 4 H250.0 Z"/>
+<text x="497.83744010583905" y="82" class="t1" font-size="13" font-weight="600">7.6%</text>
+<text x="238" y="134" class="t2" font-size="12.5" text-anchor="end">Counted per gauge, rung 2</text>
+<path class="c1" d="M250.0 114 H494.0 a4 4 0 0 1 4 4 V140 a4 4 0 0 1 -4 4 H250.0 Z"/>
+<text x="506.00431499460626" y="134" class="t1" font-size="13" font-weight="600">7.8%</text>
+<line x1="250" y1="56" x2="250" y2="150" class="axis"/>
+<text x="250" y="168" class="tm" font-size="11">Difference 0.26 pp. Gate F rejects the null only above 5 pp, so the null stands.</text>
+</svg>

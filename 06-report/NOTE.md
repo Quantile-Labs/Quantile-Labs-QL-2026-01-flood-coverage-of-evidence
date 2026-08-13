@@ -121,6 +121,10 @@ population closely, and there is no support in these data for the concern that p
 evaluation is scarcer where more people are exposed. We pre-registered that concern as our
 hypothesis and found against it, which is the result reported here.
 
+![Coverage of the published evidence base does not depend on population. Weighted by population
+in reach, 7.6%. Counted per gauge on rung 2, 7.8%. Difference 0.26 percentage points against a
+Gate F threshold of 5.](figures/fig1-gate-f.svg)
+
 Against that, the absolute level is low. Of the 71,248,661 people living in reach of any forecast
 point in the published African inventory, 65,852,420, which is **92.4%**, live in reach of none
 carrying a published per-gauge metric. The figure moves very little under the stricter
@@ -136,6 +140,10 @@ not be combined into one.
 
 No single denominator survived scrutiny, so the protocol committed in advance to reporting all of
 them with the primary metric computed at each.
+
+![Population in reach of no evidenced forecast point at each denominator: basins holding an
+evaluated gauge 66.3%, basins holding a real gauge 89.5%, basins holding any inventory point
+92.4%, all study-region basins 99.6%.](figures/fig4-denominator-ladder.svg)
 
 | Denominator | Basins | Population in reach | P_unevidenced |
 |---|---:|---:|---:|
@@ -155,6 +163,10 @@ straightforward reading that would be mostly wrong. Beside each figure below is 
 would sit at if every gauge holding a metric file turned out to be evidenced, which separates the
 part driven by whether a location was evaluated at all from the part driven by what the
 evaluation returned.
+
+![Most of the mapping-density gradient was settled before any value was read. Sparsest third
+99.998% against a floor of 99.3%, middle third 99.8% against 95.5%, densest third 91.7% against
+75.8%.](figures/fig2-mapping-density.svg)
 
 | Mapping density | Population in reach | P_unevidenced | Floor from file presence | Attributable to content |
 |---|---:|---:|---:|---:|
@@ -192,6 +204,10 @@ score if a value existed.
 Every one of the 741 African gauges holding a metric file is a Global Runoff Data Centre
 station, and the evidenced points among them are concentrated to a degree that makes the
 geography of this Note largely a geography of that archive.
+
+![The published evidence base follows a century-old gauge archive. South Africa holds 211 of
+the 242 evidenced African forecast points, 87.2%, with Liberia, Namibia, Guinea, Lesotho and
+Angola holding between 3 and 8 each.](figures/fig3-gauge-archive.svg)
 
 | Country | Evidenced points | Forecast points in inventory | Share of all evidenced points in Africa |
 |---|---:|---:|---:|
@@ -272,6 +288,11 @@ python3 04-analysis/01_evidence.py --unblind
 python3 04-analysis/02_primary.py --unblind
 python3 04-analysis/03_q4_skill.py --unblind
 ```
+
+Figures are regenerated from the results files by `04-analysis/04_figures.py` and are committed
+as SVG, so a change to a chart is a reviewable diff rather than an opaque binary swap. Every
+value plotted appears in the table beside it and in the machine-readable results, so the charts
+carry nothing a reader cannot also read as text.
 
 Inputs and checksums are in `02-data/manifests/MANIFEST.csv`, every judgement call is in
 `07-admin/DECISIONS.md`, every execution is in `07-admin/RUNLOG.md`, and the adversarial review

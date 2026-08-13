@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="280" viewBox="0 0 760 280" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' role="img" aria-label="The answer depends on what you count, so every rung is published. Population in reach of no evidenced forecast point, at each denominator">
+<style>
+  .s  { fill: #fcfcfb }
+  .t1 { fill: #0b0b0b } .t2 { fill: #52514e } .tm { fill: #898781 }
+  .grid  { stroke: #e1e0d9; stroke-width: 1 }
+  .axis  { stroke: #c3c2b7; stroke-width: 1 }
+  .c1 { fill: #2a78d6 } .c2 { fill: #eb6834 } .cg { fill: #898781 }
+  .gap { stroke: #fcfcfb; stroke-width: 2 }
+  @media (prefers-color-scheme: dark) {
+    .s  { fill: #1a1a19 }
+    .t1 { fill: #ffffff } .t2 { fill: #c3c2b7 }
+    .grid { stroke: #2c2c2a } .axis { stroke: #383835 }
+    .c1 { fill: #3987e5 } .c2 { fill: #d95926 }
+    .gap { stroke: #1a1a19 }
+  }
+</style>
+<rect width="760" height="280" class="s"/>
+<text x="0" y="18" class="t1" font-size="15" font-weight="600">The answer depends on what you count, so every rung is published</text>
+<text x="0" y="38" class="t2" font-size="12.5">Population in reach of no evidenced forecast point, at each denominator</text>
+<text x="288" y="83" class="t1" font-size="12.5" text-anchor="end">Basins holding an evaluated gauge</text>
+<text x="288" y="96" class="tm" font-size="10.5" text-anchor="end">741 basins, 16,014,565 people</text>
+<path class="c1" d="M300.0 70 H514.8 a4 4 0 0 1 4 4 V94 a4 4 0 0 1 -4 4 H300.0 Z"/>
+<text x="526.803754963885" y="89" class="t1" font-size="12.5" font-weight="600">66.3%</text>
+<text x="288" y="127" class="t1" font-size="12.5" text-anchor="end">Basins holding a real gauge</text>
+<text x="288" y="140" class="tm" font-size="10.5" text-anchor="end">2,123 basins, 51,178,147 people</text>
+<path class="c1" d="M300.0 114 H591.2 a4 4 0 0 1 4 4 V138 a4 4 0 0 1 -4 4 H300.0 Z"/>
+<text x="603.2046891583811" y="133" class="t1" font-size="12.5" font-weight="600">89.5%</text>
+<text x="288" y="171" class="t1" font-size="12.5" text-anchor="end">Basins holding any inventory point</text>
+<text x="288" y="184" class="tm" font-size="10.5" text-anchor="end">5,734 basins, 71,248,661 people</text>
+<path class="c1" d="M300.0 158 H601.0 a4 4 0 0 1 4 4 V182 a4 4 0 0 1 -4 4 H300.0 Z"/>
+<text x="613.0064141363389" y="177" class="t1" font-size="12.5" font-weight="600">92.4%</text>
+<text x="288" y="215" class="t1" font-size="12.5" text-anchor="end">All study-region basins</text>
+<text x="288" y="228" class="tm" font-size="10.5" text-anchor="end">229,744 basins, 1,319,838,500 people</text>
+<path class="c1" d="M300.0 202 H624.7 a4 4 0 0 1 4 4 V226 a4 4 0 0 1 -4 4 H300.0 Z"/>
+<text x="636.6507746779373" y="221" class="t1" font-size="12.5" font-weight="600">99.6%</text>
+<line x1="300" y1="64" x2="300" y2="236" class="axis"/>
+<text x="0" y="276" class="tm" font-size="11">A fifth rung, the product's own display surface, is not enumerable from any released artefact and is never used.</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="354" viewBox="0 0 760 354" font-family='system-ui, -apple-system, "Segoe UI", sans-serif' role="img" aria-label="The published evidence base follows a century-old gauge archive. Share of all 242 evidenced African forecast points, by country, with the population in reach of each country's points">
+<style>
+  .s  { fill: #fcfcfb }
+  .t1 { fill: #0b0b0b } .t2 { fill: #52514e } .tm { fill: #898781 }
+  .grid  { stroke: #e1e0d9; stroke-width: 1 }
+  .axis  { stroke: #c3c2b7; stroke-width: 1 }
+  .c1 { fill: #2a78d6 } .c2 { fill: #eb6834 } .cg { fill: #898781 }
+  .gap { stroke: #fcfcfb; stroke-width: 2 }
+  @media (prefers-color-scheme: dark) {
+    .s  { fill: #1a1a19 }
+    .t1 { fill: #ffffff } .t2 { fill: #c3c2b7 }
+    .grid { stroke: #2c2c2a } .axis { stroke: #383835 }
+    .c1 { fill: #3987e5 } .c2 { fill: #d95926 }
+    .gap { stroke: #1a1a19 }
+  }
+</style>
+<rect width="760" height="354" class="s"/>
+<text x="0" y="18" class="t1" font-size="15" font-weight="600">The published evidence base follows a century-old gauge archive</text>
+<text x="0" y="38" class="t2" font-size="12.5">Share of all 242 evidenced African forecast points, by country, with the population in reach of each country's points</text>
+<text x="138" y="90" class="t1" font-size="12.5" text-anchor="end" font-weight="600">ZAF</text>
+<text x="138" y="103" class="tm" font-size="10.5" text-anchor="end">16,862,019 in reach</text>
+<path class="c1" d="M150.0 78 H562.6 a4 4 0 0 1 4 4 V100 a4 4 0 0 1 -4 4 H150.0 Z"/>
+<text x="574.574839302112" y="96" class="t1" font-size="12.5" font-weight="600">87.2%  (211 of 1,718)</text>
+<text x="138" y="130" class="t1" font-size="12.5" text-anchor="end" font-weight="400">LBR</text>
+<text x="138" y="143" class="tm" font-size="10.5" text-anchor="end">94,157 in reach</text>
+<path class="cg" d="M150.0 118 H161.8 a4 4 0 0 1 4 4 V140 a4 4 0 0 1 -4 4 H150.0 Z"/>
+<text x="173.7943067033976" y="136" class="t1" font-size="12.5" font-weight="400">3.3%  (8 of 17)</text>
+<text x="138" y="170" class="t1" font-size="12.5" text-anchor="end" font-weight="400">NAM</text>
+<text x="138" y="183" class="tm" font-size="10.5" text-anchor="end">487,778 in reach</text>
+<path class="cg" d="M150.0 158 H157.8 a4 4 0 0 1 4 4 V180 a4 4 0 0 1 -4 4 H150.0 Z"/>
+<text x="169.8457300275482" y="176" class="t1" font-size="12.5" font-weight="400">2.5%  (6 of 157)</text>
+<text x="138" y="210" class="t1" font-size="12.5" text-anchor="end" font-weight="400">GIN</text>
+<text x="138" y="223" class="tm" font-size="10.5" text-anchor="end">1,020,955 in reach</text>
+<path class="cg" d="M150.0 198 H153.9 a4 4 0 0 1 4 4 V220 a4 4 0 0 1 -4 4 H150.0 Z"/>
+<text x="165.89715335169882" y="216" class="t1" font-size="12.5" font-weight="400">1.7%  (4 of 100)</text>
+<text x="138" y="250" class="t1" font-size="12.5" text-anchor="end" font-weight="400">LSO</text>
+<text x="138" y="263" class="tm" font-size="10.5" text-anchor="end">625,139 in reach</text>
+<path class="cg" d="M150.0 238 H151.9 a4 4 0 0 1 4 4 V260 a4 4 0 0 1 -4 4 H150.0 Z"/>
+<text x="163.9228650137741" y="256" class="t1" font-size="12.5" font-weight="400">1.2%  (3 of 47)</text>
+<text x="138" y="290" class="t1" font-size="12.5" text-anchor="end" font-weight="400">AGO</text>
+<text x="138" y="303" class="tm" font-size="10.5" text-anchor="end">1,089,693 in reach</text>
+<path class="cg" d="M150.0 278 H151.9 a4 4 0 0 1 4 4 V300 a4 4 0 0 1 -4 4 H150.0 Z"/>
+<text x="163.9228650137741" y="296" class="t1" font-size="12.5" font-weight="400">1.2%  (3 of 611)</text>
+<line x1="150" y1="72" x2="150" y2="310" class="axis"/>
+<text x="0" y="350" class="tm" font-size="11">All 741 African gauges holding a metric file are GRDC stations. We report the association and cannot attribute its cause.</text>
+</svg>
