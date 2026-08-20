@@ -1,6 +1,6 @@
 # QL-2026-01: Coverage of evidence, Google Flood Hub
 
-**Type:** Note · **Access tier:** black box · **Status:** pre-registered
+**Type:** Note · **Access tier:** black box · **Status:** analysed, draft in review
 
 ## Question
 
@@ -77,7 +77,8 @@ in that exact state on the day it was made, which is 2026-08-06 for v1.8 and 202
 v1.9, and says nothing whatever about any earlier date. The freeze date of 2026-08-04 recorded
 against v1.0 therefore rests on this repository's own record and should be read as our claim
 rather than as an attested fact. What matters for the study is unaffected, because the anchors
-still land before any metric value has been read, and none has been.
+were made on 2026-08-06 and 2026-08-07 and the analysis was not run until 2026-08-12, so they
+still land before any metric value was read.
 
 Amendments are **appended** to §11 and the frozen text above it is never edited, so every
 version of the protocol remains independently verifiable at its own tag. Alongside it,
@@ -121,7 +122,15 @@ it does not matter what you name the directory you clone into.
       WorldPop, GHS-POP, and 51 Geofabrik extracts.
 - [x] Strata frame built **blind** across 230,028 African level-12 basins, with all five of
       the strata that do not require a metric value fully populated.
-- [ ] Analysis, **not started, and no metric value has been read**.
-- [ ] Draft
+- [x] Analysis run **once on 2026-08-12**, against real values for the first time, under the
+      unblinding record in `07-admin/UNBLINDED.json`. The pre-registered test of the primary
+      question returned its null: population-weighted coverage is 7.6% against 7.8% counted per
+      gauge, a difference of 0.26 percentage points against a threshold of five fixed in advance.
+      Of the 71,248,661 people in reach of a forecast point in the published African inventory,
+      92.4% are in reach of none carrying a published per-gauge metric. Results are in
+      `05-results/`.
+- [x] Draft in `06-report/NOTE.md`, with the claim ladder, the red team, and four figures
+      generated from the results files.
+- [ ] External review by two hydrologists
 - [ ] Right of reply, 21 days minimum
 - [ ] Published
