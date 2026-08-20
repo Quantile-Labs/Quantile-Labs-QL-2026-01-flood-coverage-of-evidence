@@ -1,0 +1,211 @@
+{
+  "protocol_section": "11a",
+  "pre_registered": false,
+  "prompted_by": "operator adversarial self-review of the first full draft, 2026-08-20, standing in for external review, which has not happened",
+  "a1_downstream_reach": {
+    "steps_0": {
+      "share": 0.9242618610192088,
+      "numerator_pop": 65852419.98060926,
+      "denominator_pop": 71248660.96713327,
+      "basins_in_reach": 5734,
+      "basins_unevidenced": 5492
+    },
+    "steps_1": {
+      "share": 0.9108881544365618,
+      "numerator_pop": 83098224.15316813,
+      "denominator_pop": 91227692.16882537,
+      "basins_in_reach": 7802,
+      "basins_unevidenced": 7337
+    },
+    "steps_2": {
+      "share": 0.9027800824784376,
+      "numerator_pop": 94709502.69603066,
+      "denominator_pop": 104908719.78037104,
+      "basins_in_reach": 9357,
+      "basins_unevidenced": 8701
+    }
+  },
+  "a2_constrained_surface": {
+    "status": "ok",
+    "share": 0.9226523145704023,
+    "numerator_pop": 66500417.19948706,
+    "denominator_pop": 72075272.72117713,
+    "basins_covered": 5307,
+    "basins_missing_constrained": 427,
+    "unconstrained_population_of_missing_basins": 210705.29677061993,
+    "countries_covered": 57,
+    "note": "Headline only. PROTOCOL 11a forbids this surface in stratum 3 and in any figure crossing population with mapping density."
+  },
+  "a3_grdc_record": {
+    "gauges_with_metric_file": 741,
+    "matched_to_grdc_metadata": 741,
+    "unmatched": 0,
+    "median_record_end_evidenced": 2020.0,
+    "median_record_end_unevidenced": 1991.0,
+    "median_record_years_evidenced": 56.0,
+    "median_record_years_unevidenced": 27.0,
+    "evidenced_rate_by_record_end": {
+      "1980s": {
+        "evidenced": 0,
+        "n": 146,
+        "rate": 0.0,
+        "wilson": [
+          0.0,
+          0.0,
+          0.025637740120233635
+        ]
+      },
+      "1990s": {
+        "evidenced": 0,
+        "n": 233,
+        "rate": 0.0,
+        "wilson": [
+          0.0,
+          0.0,
+          0.016220123491819
+        ]
+      },
+      "2000s": {
+        "evidenced": 1,
+        "n": 81,
+        "rate": 0.012345679012345678,
+        "wilson": [
+          0.012345679012345678,
+          0.0021825938606520115,
+          0.06667042164117726
+        ]
+      },
+      "2010 or later": {
+        "evidenced": 241,
+        "n": 281,
+        "rate": 0.8576512455516014,
+        "wilson": [
+          0.8576512455516014,
+          0.8119643683877273,
+          0.8936909853246517
+        ]
+      }
+    },
+    "evidenced_rate_by_record_length": {
+      "Q1 shortest": {
+        "evidenced": 13,
+        "n": 191,
+        "rate": 0.06806282722513089,
+        "wilson": [
+          0.06806282722513089,
+          0.040203968321682305,
+          0.11295428946310287
+        ],
+        "d_yrs_range": [
+          2.0,
+          16.0
+        ]
+      },
+      "Q2": {
+        "evidenced": 32,
+        "n": 186,
+        "rate": 0.17204301075268819,
+        "wilson": [
+          0.17204301075268819,
+          0.124582187711479,
+          0.2327767894568551
+        ],
+        "d_yrs_range": [
+          17.0,
+          33.0
+        ]
+      },
+      "Q3": {
+        "evidenced": 54,
+        "n": 182,
+        "rate": 0.2967032967032967,
+        "wilson": [
+          0.2967032967032967,
+          0.2350941388148784,
+          0.3667172962997568
+        ],
+        "d_yrs_range": [
+          34.0,
+          50.0
+        ]
+      },
+      "Q4 longest": {
+        "evidenced": 143,
+        "n": 182,
+        "rate": 0.7857142857142857,
+        "wilson": [
+          0.7857142857142857,
+          0.7205185073440538,
+          0.8390978541164588
+        ],
+        "d_yrs_range": [
+          51.0,
+          117.0
+        ]
+      }
+    },
+    "interpretation_limit": "Descriptive association only. No model fitted, no causal claim, and a black-box tier cannot support one."
+  },
+  "b1_weight_diagnostics": {
+    "n_gauges": 218,
+    "kish_n_eff": 16.58868021895449,
+    "weight_concentration": {
+      "top_1_weight_share": 0.1632303760004363,
+      "top_5_weight_share": 0.44166070142341923,
+      "top_10_weight_share": 0.6161949441843808,
+      "top_25_weight_share": 0.824894417710296
+    },
+    "unweighted_mean": 0.3853464921012615,
+    "pop_weighted_mean": 0.3307325862520369,
+    "bootstrap": {
+      "seed": 20260820,
+      "draws": 10000,
+      "unweighted_ci95": [
+        0.35202878709409874,
+        0.418394933151282
+      ],
+      "pop_weighted_ci95": [
+        0.2007028914279722,
+        0.4991629905803446
+      ],
+      "difference_ci95": [
+        -0.10675010946022051,
+        0.17719552687059534
+      ],
+      "difference_excludes_zero": false
+    },
+    "metric": "F1 at return period 2.0, window 2 days, lead 0, google/2014/dual_lstm/full_run, derived by us as the harmonic mean of released precision and recall"
+  },
+  "b2_micro_average": {
+    "return_period_metric_directories": [
+      "precision",
+      "recall"
+    ],
+    "hydrograph_metric_names": [
+      "Alpha-NSE",
+      "Beta-KGE",
+      "Beta-NSE",
+      "FHV",
+      "FLV",
+      "FMS",
+      "KGE",
+      "MSE",
+      "NSE",
+      "Peak-MAPE",
+      "Pearson-r",
+      "RMSE",
+      "log-KGE",
+      "log-NSE"
+    ],
+    "concatenated_pickles": [
+      "metrics/concatenated_return_period_metrics/glofas_1980_return_period_dicts.pkl",
+      "metrics/concatenated_return_period_metrics/glofas_2014_return_period_dicts.pkl",
+      "metrics/concatenated_return_period_metrics/google_1980_return_period_dicts.pkl",
+      "metrics/concatenated_return_period_metrics/google_2014_return_period_dicts.pkl"
+    ],
+    "any_count_like_metric_published": false,
+    "verdict": "not computable",
+    "why": "The release publishes precision and recall and no contingency or event counts. A precision and a recall determine the table only up to a scale factor, so any pooled table would rest on a count we invented. The four concatenated pickles were opened on 2026-08-20 and hold the same two quantities in another container; that inspection is recorded in DECISIONS.md.",
+    "consequence": "Every F1 this study reports is a weighted macro-average across gauges and may not be read as the skill facing an average person. Per-gauge event counts are added to the right-of-reply questions."
+  }
+}

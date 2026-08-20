@@ -117,7 +117,9 @@ it does not matter what you name the directory you clone into.
       country for 5,678 of 5,678 gauges globally, and 741 of 741 in Africa.
 - [x] Protocol frozen at **v1.0 on 2026-08-04**, sha256 `52ed6235…`, tag
       `QL-2026-01-protocol-v1.0`, frozen before any metric value was read. It now stands at
-      **v1.9**, sha256 `b05c0b93…`, and all ten versions are tagged.
+      **v1.10**, sha256 `f9502147…`, and all eleven versions are tagged. The analysis ran
+      under v1.9, which was anchored before it ran; v1.10 adds only the post-hoc section §11a
+      and is not anchored.
 - [x] Data acquired and manifested, covering the Zenodo release, HydroBASINS, geoBoundaries,
       WorldPop, GHS-POP, and 51 Geofabrik extracts.
 - [x] Strata frame built **blind** across 230,028 African level-12 basins, with all five of
@@ -131,6 +133,11 @@ it does not matter what you name the directory you clone into.
       `05-results/`.
 - [x] Draft in `06-report/NOTE.md`, with the claim ladder, the red team, and four figures
       generated from the results files.
-- [ ] External review by two hydrologists
+- [x] Post-hoc additions of **2026-08-20**, under protocol §11a and reported in their own
+      section of the Note, from an adversarial self-review of the draft. Nothing pre-registered
+      was re-run and the headline does not move. Two of them changed how existing numbers are
+      reported: the population-weighted skill mean now carries its effective sample size and a
+      bootstrap interval, and it is no longer distinguishable from the unweighted mean.
+- [ ] External review by two hydrologists, who have not yet been approached
 - [ ] Right of reply, 21 days minimum
 - [ ] Published

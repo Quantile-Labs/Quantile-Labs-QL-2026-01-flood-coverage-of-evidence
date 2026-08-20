@@ -61,12 +61,54 @@ was computed*.
 | "The African record was assembled through colonial administration, war, structural adjustment, and drought" | **C** | Historical interpretation. Retained because it protects the subject, and it is not quotable as a finding. |
 | Any statement about why the evaluation set falls where it does | **absent** | Foreclosed at this tier. Explicitly disclaimed rather than written. |
 
+## Second pass, 2026-08-20, against the post-review draft
+
+A rehearsal for external review, written by us against our own draft from two assumed positions.
+**No independent reviewer has read this Note.** Five substantive points, all acted on, recorded
+as PROTOCOL §11a. Two of them were rung violations of a kind the first pass did not look for,
+because both concerned a number that was correctly computed and incorrectly framed.
+
+**5. A comparison was printed at rung A that the data support only at rung B, and arguably not
+at all.** The draft gave the unweighted mean F1 as 0.385 and the population-weighted mean as
+0.331 across 218 African gauges, with no uncertainty on either. The weights concentrate so hard
+that the effective sample size is 16.6, and a bootstrap puts the difference at -0.107 to 0.177.
+**Fixed** by publishing the effective sample size and the intervals, and by stating that the two
+are not distinguishable and that the Note draws nothing from the gap. The lesson is narrower
+than it looks: §9 refuses intervals on population shares for a good reason, and that refusal was
+carried across to a quantity where it did not apply.
+
+**6. "F1" was used for a quantity the reader would understand as a different one.** Every F1
+here is a mean of per-gauge values, not the skill facing an average person, and the second
+cannot be computed from a release that publishes precision and recall without counts. **Fixed**
+in the skill section, with the missing counts added to the right-of-reply questions.
+
+Two further points changed the Note without changing a rung: the downstream-reach sensitivity
+and the record-end join, both reported in their own section marked as post-hoc. One point was
+refused in part, on the grounds that a settlement-derived population surface may not be used to
+weight a comparison against settlement mapping density.
+
+### Rung assignment of the sentences added since the first pass
+
+| Sentence, abbreviated | Rung | Note |
+|---|---|---|
+| P_unevidenced is 91.1% one basin downstream and 90.3% two | A | Computed. Reported beside the frozen 92.4%, never in place of it. |
+| 0 of 146 evidenced where the record ends in the 1980s, 241 of 281 where it ends in 2010 or later | A | Read from GRDC station metadata, all 741 matched. |
+| "A gauge whose observations stop in 1991 cannot be scored against a test period two decades later" | **B** | Inference, and the assumption is stated in the same paragraph. Not in the opening, not in the standfirst. |
+| "The archive stopped recording across much of Africa when the institutions that fed it were cut" | **C** | Historical interpretation, retained because it protects the subject and is not quotable as a finding. |
+| Weighted and unweighted skill means are not distinguishable | A | Bootstrap, seed and draws recorded. |
+| A micro-average F1 cannot be derived from the release | A | Established from the archive's own contents, not asserted. |
+| Any claim that the weighted mean is lower than the unweighted one | **absent** | Was rung A in the first draft, is not supported, and has been removed rather than hedged. |
+
 ## Standing checks, re-run each draft
 
 - `measured` appears only where the Note refuses the word, currently two instances, both of
   them inside the disclaimer.
 - `unproven` appears nowhere.
 - No sentence contains both a population figure and a skill figure. Checked by parsing and not by reading.
-- Every numerical claim reconciles against `05-results/`. Currently 21 of 21.
+- Every numerical claim reconciles against `05-results/`. Currently 21 of 21 in the
+  pre-registered sections, and 35 of 35 across the post-review section and the two corrected
+  paragraphs, checked against `post_review.json` by parsing rather than by reading.
+- Nothing in the post-review section is quoted in the title, the standfirst or the
+  opening, and the section says in its first sentence that it is not pre-registered.
 - No claim about the currently serving model, and the version uncertainty is reported instead
   of resolved.

@@ -4,7 +4,8 @@ study: QL-2026-01
 type: Note            # Note | Review | Finding
 date: 2026-08-12
 access_tier: black box
-protocol_hash: b05c0b932ddb9c6db2f192ff5804570197470175e50ed21ce7520839321d2248
+protocol_hash: b05c0b932ddb9c6db2f192ff5804570197470175e50ed21ce7520839321d2248   # v1.9, the version the analysis ran under
+protocol_hash_current: f95021475d98b7393bbd6528354304071ee2ac6badb21dcecd718c52eb524b01  # v1.10, post-hoc additions only, NOT yet anchored
 protocol_url: https://github.com/Quantile-Labs/Quantile-Labs-QL-2026-01-flood-coverage-of-evidence
 doi: 10.5281/zenodo.21843331          # protocol v1.9; concept DOI 10.5281/zenodo.21822780
 licence: CC BY 4.0
@@ -26,7 +27,9 @@ behaves today, only about what the 2024 release published.
 **System and version:** the gauge inventory and per-gauge metrics released with Nearing et al.,
 *Nature* 627, 559–563 (2024), Zenodo `10.5281/zenodo.10397664`, retrieved 2026-08-03.
 **Protocol:** frozen 2026-08-04, amended through v1.9, sha256 `b05c0b93…`, anchored
-independently before the analysis was run.
+independently before the analysis was run. It now stands at v1.10, sha256 `f9502147…`, which
+adds the post-hoc section §11a and nothing the frozen result depends on. **v1.10 is not
+anchored**, and the version that matters for the pre-registration claim is v1.9, which is.
 **Data and code:** [10.5281/zenodo.21843331](https://doi.org/10.5281/zenodo.21843331).
 **Conflicts:** none declared, see `CONFLICTS.md`.
 
@@ -82,9 +85,16 @@ rebuttal we intend to resist, it is the outcome we would most like this Note to 
 > of which is larger than the intervals.
 >
 > **No population share here carries a confidence interval, and the omission is intended.** A
-> share computed over a modelled
-> > raster has no sampling error worth quoting, and printing one would dress the figure in a
-> precision we do not have, so we give the spread between two independent surfaces instead.
+> share computed over a modelled raster has no sampling error worth quoting, and printing one
+> would dress the figure in a precision we do not have, so we give the spread across population
+> surfaces instead. That spread is not an independence check, for the reason given two
+> paragraphs above, and it is reported with its mechanism rather than as a bare range.
+>
+> **Where an interval does belong, it is now there, and in the first draft it was not.** The
+> population-weighted skill figures rest on weights that concentrate very hard: ten basins carry
+> 61.6% of the total weight, and the effective sample size is 16.6 against 218 gauges. The
+> weighted and unweighted means are not distinguishable once that is accounted for, and the Note
+> says so where it reports them rather than leaving the reader to assume otherwise.
 
 ## What was asked
 
@@ -239,13 +249,28 @@ commensurable with their reporting and not a parallel construction.
 
 F1 is not published per gauge, since the release carries precision and recall alone, so every F1
 here is our harmonic mean of the two, with a null in either input producing a null and never a
-zero.
+zero. Every F1 below is therefore a mean of per-gauge values, and it may not be read as the skill
+facing an average person. Those are different quantities, because F1 is not linear in the counts
+it comes from, and the second one cannot be computed from this release at all: precision and
+recall alone fix a gauge's contingency table only up to a scale factor, and no event or outcome
+count is published anywhere in the archive. We asked the developer for those counts in the
+questions at the foot of this Note.
 
 For the frozen 2014 `full_run` reading at the two-year return period and zero-day lead, the
-unweighted mean across 218 African gauges is 0.385 and the population-weighted mean is 0.331. All
-three experiments appear side by side in the results file, because reporting the gauged run alone
-would describe the model where it was trained, while the locations this Note concerns are ones
-where it was not.
+unweighted mean across 218 African gauges is 0.385 and the population-weighted mean is 0.331.
+**Those two numbers are not distinguishable on these data and the Note draws nothing from the gap
+between them.** Population weighting concentrates hard: the effective sample size of the weights
+is 16.6 against 218 gauges, one basin carries 16.3% of the total weight and the ten largest carry
+61.6%, so the weighted figure is in effect an average over about seventeen gauges rather than
+218. A bootstrap over gauges puts the unweighted mean at 0.385 with a 95% interval of 0.352 to
+0.418, the weighted mean at 0.331 with an interval of 0.201 to 0.499, and their difference at
+-0.107 to 0.177, which spans zero comfortably. The first draft of this Note printed the pair
+without any of that, and a reader would have taken it as a comparison across 218 gauges.
+
+All three experiments appear side by side in the results file, because reporting the gauged run
+alone would describe the model where it was trained, while the locations this Note concerns are
+ones where it was not. The cut that speaks to the product's actual use, `continent_splits`, which
+holds Africa out entirely, gives 0.347 unweighted against 0.339 weighted at the same reading.
 
 Two cautions belong beside those numbers instead of beneath them. The tolerance window, meaning
 the slack allowed between a predicted and an observed threshold crossing, moves the figure further
@@ -254,6 +279,113 @@ itself uses. And the rarest return periods rest on very little, since at the fif
 under the frozen experiment there are three African gauges, all three of which score perfectly
 because no qualifying event occurred, which the released code produces by construction. Any
 statement about extreme events needs its denominator attached to it.
+
+## Added after review, and none of it pre-registered
+
+Everything in this section was specified after the values were read, on 2026-08-20, and it
+carries none of the weight the rest of the Note does. It is separated rather than folded in so
+that a reader can see which of our commitments were made blind and which were not. The protocol
+records it as §11a, in its own table, because §11 opens by stating that every amendment in it
+was made before any metric value was read and appending this to it would have made that sentence
+false.
+
+**What prompted it, stated exactly.** An adversarial self-review, written by us against our own
+draft from two assumed positions, an operational hydrologist and a forecast-verification
+statistician. **No independent reviewer has read this Note.** The two hydrologists our red team
+asked for have not been approached. This was a rehearsal, it is worth what a rehearsal is worth,
+and it is named here for what it was rather than for the thing it stands in for. Two of the five
+points it raised changed what the Note may print, and both corrections are in the sections above
+rather than quarantined here.
+
+### The headline survives a harder definition of reach, and moves the way the objection predicted
+
+The frozen definition of *in reach* is the level-12 basin containing the forecast point, which
+is the developer's own geometry. The objection is that this is the wrong shape: a river forecast
+serves people downstream, the median basin here is 137 km², and evidenced gauges sit on larger
+rivers than unevidenced ones, median upstream area 2,651 km² against 1,560 km². Truncating reach
+at the basin boundary should therefore drop more population from the evidenced side than from
+the unevidenced side, and inflate our figure.
+
+It does, and not by much.
+
+| Reach | Basins in reach | Population in reach | P_unevidenced |
+|---|---:|---:|---:|
+| Containing basin only, the frozen definition | 5,734 | 71,248,661 | 92.4% |
+| One basin downstream as well | 7,802 | 91,227,692 | 91.1% |
+| Two basins downstream as well | 9,357 | 104,908,720 | 90.3% |
+
+The frozen figure remains the headline, because it is the one that was fixed before any value
+was read, and the objection was right about the direction while the effect is 1.3 points at one
+step and 2.2 at two. The first row was recomputed from the topology rather than copied across
+from the primary results, and it reproduces 92.43% exactly, which is the only reason the other
+two rows are worth reading.
+
+### The shortfall in African evidenced gauges tracks the end of the observational record
+
+The Note reports above that 242 of the 741 African gauges holding a metric file carry a value,
+against 59.5% for the released set as a whole, and offers no mechanism for the gap. There is
+one, it is in metadata we already held, and it is close to total. All 741 match to Global Runoff
+Data Centre station records.
+
+| Daily record ends | Evidenced | Of | Rate |
+|---|---:|---:|---:|
+| In the 1980s | 0 | 146 | 0.0% (95% CI 0.0-2.6%) |
+| In the 1990s | 0 | 233 | 0.0% (95% CI 0.0-1.6%) |
+| In the 2000s | 1 | 81 | 1.2% (95% CI 0.2-6.7%) |
+| In 2010 or later | 241 | 281 | 85.8% (95% CI 81.2-89.4%) |
+
+The median record behind an evidenced gauge ends in 2020. The median record behind an
+unevidenced one ends in 1991. Record length runs the same way, from 6.8% evidenced in the
+shortest quartile to 78.6% in the longest.
+
+A gauge whose observations stop in 1991 cannot be scored against a test period two decades
+later, whatever anyone decided about it. This is descriptive and we fit no model to it, but it
+is the clearest statement in this Note of something we have said throughout in weaker terms:
+the geography of published evidence is the geography of a century-old observational archive, and
+the archive stopped recording across much of Africa when the institutions that fed it were cut.
+That is not a decision by the developer and it should not be read as one.
+
+### A third population surface
+
+The frozen weight is WorldPop unconstrained, which distributes census counts by covariates with
+no built-up mask and so places some people on ground nobody lives on. The objection is that
+this matters most in the thinly mapped basins, which is where this Note spends much of its
+attention. We added WorldPop constrained, which places population only onto detected building
+footprints, as a third surface, fetched for all 58 countries in the study region.
+
+**It is admitted for the headline and forbidden everywhere else in this Note, and the reason is
+not administrative.** Our mapping-density strata cut basins by how densely OpenStreetMap has
+recorded settlement. A population surface derived from detected buildings, used to weight a
+comparison against detected settlement, would manufacture the correlation the study exists to
+test. That is why unconstrained was chosen on day one, the reasoning has not weakened, and the
+protocol now forbids the constrained surface in stratum 3 as a binding rule rather than leaving
+it to judgement.
+
+On the headline the three surfaces agree closely. P_unevidenced is 92.3% on the constrained
+surface against 92.4% unconstrained and 92.0% on GHS-POP, a spread of 0.4 points across all
+three. The constrained denominator is slightly the larger of the two WorldPop readings,
+72,075,273 people against 71,248,661, which is what you would expect from a surface that pulls
+population onto built-up land, since built-up land in this inventory tends to sit near the
+rivers the forecast points are on.
+
+One property of the constrained surface has to be stated rather than absorbed. Of the 5,734
+basins in reach, 427 carry no constrained value at all, holding 210,705 people on the
+unconstrained surface. That is not a country we failed to fetch, because every country was
+fetched. It is the surface having no valid pixel anywhere in those basins, and our rule
+throughout has been that a basin of nodata is unknown rather than empty. The comparison above
+therefore runs over the 5,307 basins where a constrained value exists, and it is reported that
+way rather than as a continental figure. The same distinction between nothing being there and
+nothing being recorded is the one this whole Note is about, so it would be poor practice to
+quietly resolve it in our own favour here.
+
+### The two corrections that are not in this section
+
+The other two points the rehearsal raised changed how numbers already in the Note must be
+reported, so they are in the results above rather than here. The population-weighted skill mean
+now carries its effective sample size and a bootstrap interval, and the Note no longer draws
+anything from the gap between the weighted and unweighted figures. And every F1 here is now
+labelled as a mean across gauges rather than as the skill facing an average person, because the
+second quantity cannot be computed from what the release publishes.
 
 ## What this does not establish
 
@@ -293,6 +425,11 @@ python3 _lib/manifest.py QL-2026-01 --verify
 python3 04-analysis/01_evidence.py --unblind
 python3 04-analysis/02_primary.py --unblind
 python3 04-analysis/03_q4_skill.py --unblind
+
+# The post-hoc additions of 2026-08-20, which are not part of the pre-registered result.
+# The first re-fetches roughly a gigabyte of population rasters and takes a while.
+python3 03-harness/02d_add_worldpop_constrained.py
+python3 04-analysis/05_post_review.py
 ```
 
 Figures are regenerated from the results files by `04-analysis/04_figures.py` and are committed
@@ -319,6 +456,10 @@ the Note as questions the public evidence cannot settle.*
 3. Which model version currently serves Africa, and are per-gauge African metrics published for
    it anywhere?
 4. Is any evaluation of the current production model in Africa planned or complete?
+5. Will you publish per-gauge event counts, or the true-positive, false-positive and
+   false-negative counts behind the released precision and recall? Without them no one outside
+   Google can pool the released metrics correctly, which is what any population-weighted reading
+   of them requires.
 
 ## Corrections
 
