@@ -150,6 +150,23 @@ reasons the limits box gives.
 Both of those statements concern coverage, neither concerns skill, and combining them into one
 sentence would misrepresent both.
 
+**How far a forecast point reaches, and what happens when you let it reach further.** In reach
+means the level-12 basin holding the point, which is the developer's own geometry and was fixed
+before any value was read. It is a conservative footprint, because flood waves travel down
+channel networks and a gauge near a basin outlet plainly informs people below it. Letting reach
+propagate downstream gives 91.1% one basin down and 90.3% two, against the frozen 92.4%, over
+denominators that grow from 71.2 million people to 91.2 and 104.9 million. The first reviewer of
+this Note asked for those figures here rather than further down, and was right to: a reader
+assessing 92.4% should be able to see immediately what the spatial definition is doing to it.
+
+**We have not made the downstream reading the primary one, and the reason is not that we prefer
+our own number.** It gives a lower headline, so the choice costs us rather than pays us. The
+frozen definition governs because it was frozen, and swapping a primary metric after the values
+are in view is the move that pre-registration exists to prevent, whichever direction it moves the
+answer. A reader who finds the downstream reading more defensible should use it; both are printed,
+the fuller treatment is in the post-review section, and nothing in this Note turns on the
+difference.
+
 ### The answer depends on what you count, so here is every rung
 
 No single denominator survived scrutiny, so the protocol committed in advance to reporting all of
@@ -438,8 +455,9 @@ value plotted appears in the table beside it and in the machine-readable results
 carry nothing a reader cannot also read as text.
 
 Inputs and checksums are in `02-data/manifests/MANIFEST.csv`, every judgement call is in
-`07-admin/DECISIONS.md`, every execution is in `07-admin/RUNLOG.md`, and the adversarial review
-we ran against ourselves is in `RED-TEAM.md`. Where our own record is weaker than it appears, and
+`07-admin/DECISIONS.md`, every execution is in `07-admin/RUNLOG.md`, the adversarial review
+we ran against ourselves is in `RED-TEAM.md`, and external review of the draft, with every point
+we declined and why, is in `REVIEW-LOG.md`. Where our own record is weaker than it appears, and
 in two places it is, the logs say so at the point where it is weaker instead of leaving it to be
 discovered.
 
