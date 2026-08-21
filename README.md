@@ -138,6 +138,12 @@ it does not matter what you name the directory you clone into.
       was re-run and the headline does not move. Two of them changed how existing numbers are
       reported: the population-weighted skill mean now carries its effective sample size and a
       bootstrap interval, and it is no longer distinguishable from the unweighted mean.
-- [ ] External review by two hydrologists, who have not yet been approached
+- [x] External review by two hydrologists, **2026-08-21**. The second found nine substantive
+      problems, all verified. The largest: the frozen definition of *evidenced* reads one of the
+      two evaluation periods the release publishes, and the other doubles the evidenced African
+      gauge count. **The headline is now a range, 81.2% to 92.4%**, per the study's own Gate D,
+      which forbids a point estimate where defensible definitions move the metric more than ten
+      points. Every point and its disposition is in `06-report/REVIEW-LOG.md`.
+- [ ] A third reviewer, on the evidence that the first two differed enormously in what they found
 - [ ] Right of reply, 21 days minimum
 - [ ] Published

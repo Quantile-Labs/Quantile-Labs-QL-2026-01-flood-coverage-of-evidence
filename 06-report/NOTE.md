@@ -18,9 +18,10 @@ licence: CC BY 4.0
 
 # Population-weighted coverage of published flood-forecast evaluation in Africa
 
-*Coverage of the published evidence base tracks population closely, and 92.4% of the people
-in reach of an African forecast point are in reach of none carrying a published per-gauge
-metric.*
+*Coverage of the published evidence base tracks population closely. Between 81.2% and 92.4% of
+the people behind an African forecast point are behind none carrying a published per-gauge
+metric, and which end of that range you take depends on a choice about evaluation period that
+our own protocol never justified.*
 
 **Access tier:** black box, so we queried no system and can say nothing about how Flood Hub
 behaves today, only about what the 2024 release published.
@@ -44,14 +45,25 @@ Google may well have evaluated performance at every one of the locations we desc
 no published value, since internal work is invisible to a black-box study by definition, so our
 subject throughout is what was *published* and never what was *measured*.
 
-**Coverage of the published evidence base tracks the historical gauge network, and that network
-is not the developer's doing.** Every one of the 741 African gauges carrying a metric file comes
-from the Global Runoff Data Centre archive, and 211 of the 242 evidenced points, which is 87.2%,
-lie in South Africa. Per-gauge metrics can exist only where a usable observational record exists,
-and the African record was assembled over a century by national hydrological services through
-colonial administration, war, structural adjustment, and drought. Where our maps look sparse,
-the most defensible reading is that this is where the gauges are, and anyone taking the pattern
-below as an indictment of Google has misread it.
+**Coverage of the published evidence base tracks which gauges were still reporting when the
+evaluation window opened, and that is not the developer's doing.** The Global Runoff Data Centre
+archive reaches most of the continent: 32 African countries hold at least one gauge with a metric
+file. Published values exist for 11. What is narrow here is not the archive's map but its
+calendar. The frozen definition reads an evaluation period running from 2014, and of the 463
+African gauges whose daily record ends before 2014, exactly one carries a published value, while
+241 of the 278 whose record runs to 2014 or beyond do. A station that stopped reporting in 1991
+cannot be scored against 2014, whoever is doing the scoring. Where our maps look sparse, the most
+defensible reading is that this is where the observations were still arriving, and anyone taking
+the pattern below as an indictment of Google has misread it.
+
+**What the developer has published is more than the field's norm, and that belongs here rather
+than in a footnote.** They open-sourced the production model architectures, released the
+pretrained weights, and published a blunt warning against the most likely misuse of those
+weights. They released per-gauge precision and recall for 5,678 gauges under an open licence,
+which is why this Note can exist at all, and a study of what is missing from a release is only
+honest if it says first what the release contains. Almost nothing else in operational flood
+forecasting is open to this degree, and every criticism below is possible because of a decision
+to publish that most of the field has not made.
 
 We did not look at the Flood Hub product itself, and there is no screenshot here, no gauge list
 pulled from the service, and no API call, because the API requires approval and serves no
@@ -64,6 +76,13 @@ rebuttal we intend to resist, it is the outcome we would most like this Note to 
 >
 > **Absence of a published metric is not evidence of poor skill.** This is the sentence the whole
 > Note is built to protect, and every figure below should be read through it.
+>
+> **The headline is a range because our own definition was narrower than we claimed.** The frozen
+> definition of *evidenced* reads one of the two evaluation periods the release publishes, and the
+> other carries values for twice as many African gauges. That is worth eleven points and it is the
+> largest single uncertainty in this Note, larger than every other sensitivity we measured put
+> together. It is our error, it was found by a reviewer rather than by us, and it is described in
+> full rather than folded into a confidence interval, because it is not that kind of uncertainty.
 >
 > We hold no information about internal evaluation, about the model currently serving Flood Hub,
 > or about the roughly 5,000 verified and 240,000 lower-confidence display points the product
@@ -128,44 +147,96 @@ after unblinding would have meant choosing the denominator with the answer alrea
 
 ## Results
 
-**The headline is the null.** Population-weighted coverage of the published evidence base is
-7.6%, and unweighted coverage across the same 3,090 real African gauges is 7.8%, a difference of
-0.26 percentage points against a pre-registered threshold of five. The evidence base tracks
-population closely, and there is no support in these data for the concern that published
+**The headline is the null.** There is no support in these data for the concern that published
 evaluation is scarcer where more people are exposed. We pre-registered that concern as our
-hypothesis and found against it.
+hypothesis and found against it, and the null holds however the comparison is drawn.
+
+**The gate as we ran it compared two different denominators, and we are reporting that rather
+than quietly repairing it.** Gate F sets population-weighted coverage against gauge-count
+coverage. The population side was computed over all 5,734 basins holding any inventory point and
+the gauge side over the 3,090 real gauges, which are different rungs of the ladder below. Our
+2026-08-07 amendment reasoned carefully about which rung the gauge side belonged on and never
+made the same decision for the population side. The difference it reported, 0.26 points, is
+therefore two mismatched denominators very nearly cancelling.
+
+| Comparison | Population-weighted | Counted | Difference |
+|---|---:|---:|---:|
+| As pre-registered and run, mismatched rungs | 7.57% | 7.83% | 0.26 pp |
+| Both on real gauges | 10.54% | 7.83% | 2.71 pp |
+| Both on all inventory points | 7.57% | 3.57% | 4.00 pp |
+
+**The verdict is unchanged.** Every matching sits inside the five-point threshold fixed before
+any value was read, so H0 stands whichever you take. What changes is the story around it. Matched
+on real gauges the difference runs the *other* way from the concern we pre-registered: coverage is
+better where people are, 10.5% against 7.8%. Found by the second external reviewer, verified, and
+recorded in the protocol as a defect in a pre-registered gate rather than corrected in place, so
+that the gate keeps the verdict it actually returned.
+
+One further caution about this comparison, since it is the load-bearing one. The two sides are not
+quite the same shape: the population side asks whether a basin holds any evidenced point, while
+the gauge side counts gauges. Where a basin holds several points the first runs mechanically
+higher. It is a fair comparison and a same-shape one would be fairer.
 
 ![Coverage of the published evidence base does not depend on population. Weighted by population
 in reach, 7.6%. Counted per gauge on rung 2, 7.8%. Difference 0.26 percentage points against a
-Gate F threshold of 5.](figures/fig1-gate-f.svg)
+Gate F threshold of 5. The figure shows the comparison as pre-registered and run; the two sides
+sit on different rungs and the matched versions, 2.71 and 4.00 points, are in the table
+above.](figures/fig1-gate-f.svg)
 
-Against that, the absolute level is low. Of the 71,248,661 people living in reach of any forecast
-point in the published African inventory, 65,852,420, or **92.4%**, live in reach of none that
-carries a published per-gauge metric. The figure moves very little under the stricter
-definitions, reaching 94.1% at the five-year reading, a spread of 1.6 points, narrow enough for the
-headline to stand as a single number instead of a range. It moves less still between
-population surfaces, 92.4% against 92.0%, though that agreement should not be over-read, for
-reasons the limits box gives.
+### The absolute level is high, and it is a range rather than a number
+
+Of the 71,248,661 people behind a forecast point in the published African inventory, **between
+81.2% and 92.4% are behind none carrying a published per-gauge metric**. We are not able to give
+you one number, and the reason is a mistake of ours rather than a property of the world.
+
+The frozen definition of *evidenced* reads the metric tables published for the evaluation period
+running from 2014. The same release publishes the same tables for a period running from 1980, and
+they carry values for twice as many African gauges, 486 of 741 against 242. Read that way, the
+figure is 81.2%. Nobody chose the narrower reading: it was fixed on day two while settling a
+different question, and it survived a red team, a claim-ladder pass and a referee rehearsal before
+the second external reviewer of this Note found it in a week. Our protocol claims the frozen
+definition is the most generous reading available and that where a choice could cut either way we
+take the option that flatters the subject. On this axis both claims are false, by eleven points,
+in the direction that flatters us.
+
+Our own pre-registered Gate D says that where the primary metric moves by more than ten points
+across defensible definitions, no single headline number may be published, and that a range
+honestly presented is a publishable result while a point estimate chosen from several is not.
+Eleven points is more than ten. So the range is the result.
+
+| Definition of *evidenced* | African gauges evidenced | P_unevidenced |
+|---|---:|---:|
+| Evaluation period from 1980, and the union of both | 486 of 741 | **81.2%** |
+| Evaluation period from 2014, the frozen definition | 242 of 741 | **92.4%** |
+
+Within the frozen reading the figure is stable: it moves 1.6 points across the stricter
+return-period definitions, reaching 94.1% at the five-year reading, and 0.4 points across three
+population surfaces. That stability is real and it is also the reason the period problem went
+unnoticed for so long, because everything we thought to vary barely moved the answer.
 
 Both of those statements concern coverage, neither concerns skill, and combining them into one
 sentence would misrepresent both.
 
-**How far a forecast point reaches, and what happens when you let it reach further.** In reach
-means the level-12 basin holding the point, which is the developer's own geometry and was fixed
-before any value was read. It is a conservative footprint, because flood waves travel down
-channel networks and a gauge near a basin outlet plainly informs people below it. Letting reach
-propagate downstream gives 91.1% one basin down and 90.3% two, against the frozen 92.4%, over
-denominators that grow from 71.2 million people to 91.2 and 104.9 million. The first reviewer of
-this Note asked for those figures here rather than further down, and was right to: a reader
-assessing 92.4% should be able to see immediately what the spatial definition is doing to it.
+**How far a forecast point reaches, and what happens when you let it reach further.** Our unit
+is the level-12 basin holding the point, which is the developer's own geometry and was fixed
+before any value was read. Strictly it is the point's own drainage unit rather than its reach,
+and we use the plainer word below only where the distinction does not matter. It is a
+conservative footprint, because flood waves travel down channel networks and a gauge near a basin
+outlet plainly informs people below it. Letting the footprint propagate downstream, one basin at
+a time:
 
-**We have not made the downstream reading the primary one, and the reason is not that we prefer
-our own number.** It gives a lower headline, so the choice costs us rather than pays us. The
-frozen definition governs because it was frozen, and swapping a primary metric after the values
-are in view is the move that pre-registration exists to prevent, whichever direction it moves the
-answer. A reader who finds the downstream reading more defensible should use it; both are printed,
-the fuller treatment is in the post-review section, and nothing in this Note turns on the
-difference.
+| Steps downstream | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| P_unevidenced | 92.43 | 91.09 | 90.28 | 90.55 | 90.87 | 90.93 | 91.05 | 91.16 | 91.10 |
+| Basins | 5,734 | 7,802 | 9,357 | 10,556 | 11,520 | 12,320 | 13,002 | 13,589 | 14,095 |
+
+The curve reaches its minimum at two steps and turns back, settling near 91%. **Under the frozen
+definition of *evidenced*, the figure sits between 90.3% and 92.4% across every footprint from
+zero to eight basins downstream**, which is a stronger robustness claim than any single
+sensitivity. An earlier draft stopped at two steps, which is exactly where the effect is largest,
+and the second external reviewer was right that a reader would be entitled to wonder why. The
+full curve is published because it is the honest answer and because it happens to be the better
+one for us.
 
 ### The answer depends on what you count, so here is every rung
 
@@ -183,7 +254,9 @@ evaluated gauge 66.3%, basins holding a real gauge 89.5%, basins holding any inv
 | Basins holding any inventory point | 5,734 | 71,248,661 | 92.4% |
 | All study-region basins | 229,744 | 1,319,838,500 | 99.6% |
 
-The product's own display surface would be a fifth rung, and because it is not enumerable from
+Every figure in this table is computed under the frozen definition of *evidenced*, so each is the
+upper end of its own range. Read on the 1980 evaluation period the whole column falls by roughly
+eleven points. The product's own display surface would be a fifth rung, and because it is not enumerable from
 anything in the release we never use it. A reader who prefers a different rung can take it from
 this table, and publishing the ladder in place of one number is what makes that possible.
 
@@ -262,7 +335,10 @@ Among African gauges that do carry published values, skill can be examined with 
 weighted by the population of its basin instead of counted once. Our derived F1 for the 1980
 datasets under the `kfold_splits` experiment at the five-year return period is 0.262328, which
 reproduces the value in the developer's own committed notebook output exactly, so what follows is
-commensurable with their reporting and not a parallel construction.
+commensurable with their reporting and not a parallel construction. F1 is defined as twice
+precision times recall over their sum, so deriving it per gauge from the two published values
+takes no liberty and involves no approximation. What it is not is a quantity you can average
+across gauges and read as the skill facing a person, for the reason the next paragraph gives.
 
 F1 is not published per gauge, since the release carries precision and recall alone, so every F1
 here is our harmonic mean of the two, with a null in either input producing a null and never a
@@ -273,8 +349,10 @@ recall alone fix a gauge's contingency table only up to a scale factor, and no e
 count is published anywhere in the archive. We asked the developer for those counts in the
 questions at the foot of this Note.
 
-For the frozen 2014 `full_run` reading at the two-year return period and zero-day lead, the
-unweighted mean across 218 African gauges is 0.385 and the population-weighted mean is 0.331.
+For the frozen 2014 `full_run` reading at the two-year return period, **a two-day tolerance
+window** and zero-day lead, the unweighted mean across 218 African gauges is 0.385 and the
+population-weighted mean is 0.331. The window is named here because it moves the figure further
+than anything else available to us, as the cautions below set out.
 **Those two numbers are not distinguishable on these data and the Note draws nothing from the gap
 between them.** Population weighting concentrates hard: the effective sample size of the weights
 is 16.6 against 218 gauges, one basin carries 16.3% of the total weight and the ten largest carry
@@ -289,13 +367,34 @@ alone would describe the model where it was trained, while the locations this No
 ones where it was not. The cut that speaks to the product's actual use, `continent_splits`, which
 holds Africa out entirely, gives 0.347 unweighted against 0.339 weighted at the same reading.
 
-Two cautions belong beside those numbers instead of beneath them. The tolerance window, meaning
-the slack allowed between a predicted and an observed threshold crossing, moves the figure further
-than any other choice available to us, from 0.154 at zero days to 0.385 at the two days the paper
-itself uses. And the rarest return periods rest on very little, since at the fifty-year reading
-under the frozen experiment there are three African gauges, all three of which score perfectly
-because no qualifying event occurred, which the released code produces by construction. Any
-statement about extreme events needs its denominator attached to it.
+**Degenerate values are not a curiosity at the rare end, and an earlier draft of this Note treated
+them as one.** The released code returns a precision or a recall of exactly 1 where no event was
+observed and none predicted, so a gauge can score perfectly because nothing happened there. Our
+protocol committed on 2026-08-04 to reporting the count at every return period with the figures
+both including and excluding them, and the first draft did that only for the fifty-year case. It
+matters well before then. The strict count is pairs where precision and recall are both exactly 1;
+the broad count is either of them.
+
+| Return period | Gauges | Degenerate, strict | Degenerate, broad | Mean F1 | Excluding strict | Excluding broad |
+|---|---:|---:|---:|---:|---:|---:|
+| 1.01 yr | 230 | 0 | 0 | 0.326 | 0.326 | 0.326 |
+| 2 yr | 218 | 4 | 48 | 0.385 | 0.374 | 0.320 |
+| 5 yr | 120 | 21 | 50 | 0.386 | 0.256 | 0.105 |
+| 10 yr | 42 | 13 | 18 | 0.449 | 0.202 | 0.107 |
+| 20 yr | 15 | 5 | 6 | 0.411 | 0.117 | 0.056 |
+| 50 yr | 3 | 3 | 3 | 1.000 | undefined | undefined |
+
+At the metric of record the strict reading moves the mean by 1.1 points and the broad reading by
+6.5. Beyond the five-year return period the published mean is dominated by gauges that scored
+perfectly because no qualifying event occurred, and by twenty years the figure is built on fifteen
+gauges of which a third are degenerate under the strict reading. **Any statement about extreme
+events needs its denominator and its degenerate count attached to it, and this Note makes none.**
+The one-sided flag that produced the strict column alone was found by external review and
+corrected on 2026-08-21.
+
+The other caution is the tolerance window, meaning the slack allowed between a predicted and an
+observed threshold crossing. It moves the figure further than any other choice available to us,
+from 0.154 at zero days to 0.385 at the two days the paper itself uses.
 
 ## Added after review, and none of it pre-registered
 
@@ -337,30 +436,70 @@ step and 2.2 at two. The first row was recomputed from the topology rather than 
 from the primary results, and it reproduces 92.43% exactly, which is the only reason the other
 two rows are worth reading.
 
-### The shortfall in African evidenced gauges tracks the end of the observational record
+### What the frozen evaluation period cost, and how we came to measure it
 
-The Note reports above that 242 of the 741 African gauges holding a metric file carry a value,
-against 59.5% for the released set as a whole, and offers no mechanism for the gap. There is
-one, it is in metadata we already held, and it is close to total. All 741 match to Global Runoff
-Data Centre station records.
+This is the largest number in this Note and it was produced by the review process rather than by
+us. The frozen definition of *evidenced* reads one evaluation period. The release publishes two.
+
+| Definition | African gauges evidenced | Evidenced globally | P_unevidenced |
+|---|---:|---:|---:|
+| Period from 2014, frozen | 242 of 741 | 59.5% | 92.43% |
+| Period from 1980 | 486 of 741 | 89.0% | 81.22% |
+| Union of both, the genuinely most generous reading | 486 of 741 | | 81.22% |
+
+The union equals the 1980 figure exactly, so every gauge evidenced under the frozen definition is
+also evidenced under the other, and the second path adds 244 African gauges the first missed.
+
+Measuring this required reading metric values a second time, which this study is built to do only
+once. That second read is recorded in `07-admin/UNBLINDED.json` with its reason and its timestamp,
+it appears in the run log as a second authorised read, and it did not touch the frozen pipeline:
+`01_evidence.py` and `02_primary.py` have not been re-run and their outputs are unchanged.
+
+**We would rather have found this ourselves.** It was raised by the second external reviewer, who
+sized it at about seven points from the tables alone before we computed eleven. It had survived a
+red team written in week one, a claim-ladder pass that found four other things, a referee
+rehearsal, and a first external review. The general lesson is not that our checks were weak, since
+several of them worked, but that every one of them examined choices we knew we had made. Nobody
+had made this one. It was a restriction inherited on day two while a different question was being
+settled, and an unmade decision leaves no trace for a reviewer of decisions to find.
+
+### The shortfall in African evidenced gauges is mostly the evaluation window, by construction
+
+The Note reports above that 242 of the 741 African gauges holding a metric file carry a value
+under the frozen definition. An earlier draft called the explanation a mechanism we had
+discovered. It is closer to a restatement of the inclusion criterion, and saying so costs us the
+better story and is what the data support.
+
+The frozen path evaluates over a period running from 2014. The released code titles the same
+figures `2014-2022` for that path and `1980-2021` for the other. A gauge whose daily record ended
+before 2014 has no observations inside that window, so no metric can be computed for it however
+the evaluation was designed. All 741 match to Global Runoff Data Centre station records, and the
+split falls exactly where the window opens:
 
 | Daily record ends | Evidenced | Of | Rate |
 |---|---:|---:|---:|
-| In the 1980s | 0 | 146 | 0.0% (95% CI 0.0-2.6%) |
-| In the 1990s | 0 | 233 | 0.0% (95% CI 0.0-1.6%) |
-| In the 2000s | 1 | 81 | 1.2% (95% CI 0.2-6.7%) |
-| In 2010 or later | 241 | 281 | 85.8% (95% CI 81.2-89.4%) |
+| Before 2014 | 1 | 463 | 0.2% |
+| 2014 or later | 241 | 278 | 86.7% |
 
-The median record behind an evidenced gauge ends in 2020. The median record behind an
-unevidenced one ends in 1991. Record length runs the same way, from 6.8% evidenced in the
-shortest quartile to 78.6% in the longest.
+There are no gauges in this set whose record ends between 2012 and 2014, so the cliff is sharp
+rather than a gradient, and it sits on the boundary. **This is what a definitional cut looks like,
+not what a dose-response looks like**, and an earlier draft's decadal bins made it appear to be
+the second. We have dropped the record-length table that sat beside it, because long records are
+old records and the two variables are the same one wearing different clothes.
 
-A gauge whose observations stop in 1991 cannot be scored against a test period two decades
-later, whatever anyone decided about it. This is descriptive and we fit no model to it, but it
-is the clearest statement in this Note of something we have said throughout in weaker terms:
-the geography of published evidence is the geography of a century-old observational archive, and
-the archive stopped recording across much of Africa when the institutions that fed it were cut.
-That is not a decision by the developer and it should not be read as one.
+What is not definitional are the exceptions, and they are the only informative rows here. One
+gauge carries a published value despite a record ending in 2002, which under a strict reading
+should not exist and suggests the recorded end date is wrong for that station or that a value
+reached the table another way. Thirty-seven gauges carry no value despite records running to 2017
+or later, so overlapping the window is necessary and not sufficient: a gauge also needs enough
+qualifying events inside it. Records ending in 2018 are evidenced at 4 of 15 against 53 of 59 for
+2019, which is the shape of a threshold on how much usable overlap there is rather than of a
+policy.
+
+This is the same fact as the eleven-point range at the top of this Note, seen from the other side.
+The gauges the 2014 window excludes are largely the ones the 1980 window includes, which is why
+reading the other path doubles the evidenced count. One choice about evaluation period drives both
+numbers.
 
 ### A third population surface
 
@@ -384,6 +523,12 @@ three. The constrained denominator is slightly the larger of the two WorldPop re
 72,075,273 people against 71,248,661, which is what you would expect from a surface that pulls
 population onto built-up land, since built-up land in this inventory tends to sit near the
 rivers the forecast points are on.
+
+Fourteen basins that hold a forecast point carry no population value on the frozen surface
+either, and they are dropped from the primary metric on both sides of the ratio. That is the same
+rule and the same reasoning as below, and it is stated here because a Note that makes this much of
+the difference between nothing being there and nothing being recorded should not leave its own
+fourteen cases in a results file.
 
 One property of the constrained surface has to be stated rather than absorbed. Of the 5,734
 basins in reach, 427 carry no constrained value at all, holding 210,705 people on the
@@ -422,7 +567,8 @@ to establish which version serves the product, an uncertainty we report openly i
 resolving by assumption.
 
 Coverage being worse where people live is contradicted by our own pre-registered test, so any
-reading of the 92.4% figure that implies it runs against the result printed immediately above it.
+reading of the 81.2% to 92.4% range that implies it runs against the result printed immediately
+above it.
 
 Why the evaluation set falls where it does is a question we cannot answer. We can show that it
 follows the Global Runoff Data Centre archive, and we cannot show what gave that archive its
@@ -447,6 +593,10 @@ python3 04-analysis/03_q4_skill.py --unblind
 # The first re-fetches roughly a gigabyte of population rasters and takes a while.
 python3 03-harness/02d_add_worldpop_constrained.py
 python3 04-analysis/05_post_review.py
+
+# The second authorised read, 2026-08-21. This one opens metric values, so it requires a reason
+# and records itself in 07-admin/UNBLINDED.json.
+python3 04-analysis/06_period_sensitivity.py --unblind --rerun-reason "..."
 ```
 
 Figures are regenerated from the results files by `04-analysis/04_figures.py` and are committed

@@ -99,6 +99,42 @@ weight a comparison against settlement mapping density.
 | A micro-average F1 cannot be derived from the release | A | Established from the archive's own contents, not asserted. |
 | Any claim that the weighted mean is lower than the unweighted one | **absent** | Was rung A in the first draft, is not supported, and has been removed rather than hedged. |
 
+## Third pass, 2026-08-21, after the second external review
+
+The pass that mattered. The second reviewer found nine things, all verified, and two of them were
+rung violations of the most serious kind available to this study: a headline number presented at
+rung A that a defensible alternative definition moves by eleven points, and two pre-registered
+commitments the draft did not keep.
+
+**7. The headline was a point estimate that could not survive its own Gate D.** 92.4% was rung A
+and stated as a fact about the world. It is a fact about one evaluation period, chosen without
+argument, and the other period the release publishes gives 81.2%. **Fixed** by leading with the
+range in the title area, the standfirst, the limits box and the results, and by saying in the
+Note's own voice that the narrowing was our error and a reviewer found it.
+
+**8. Two pre-registered commitments were unkept, and unkept commitments are worse than absent
+ones.** The 2026-08-04 amendment required degenerate counts at every return period with figures
+including and excluding; the draft gave the fifty-year case only. The same day's amendment called
+the credit paragraph "not optional"; it was absent entirely. **Both fixed.** Recorded here rather
+than only in `DECISIONS.md` because a claim ladder that checks what the Note says, and never what
+the Note promised to say, is checking half the thing.
+
+### Rung assignment of the sentences added or changed in this pass
+
+| Sentence, abbreviated | Rung | Note |
+|---|---|---|
+| "Between 81.2% and 92.4%" | A | Both ends computed. Neither is a point estimate and the Note never picks one. |
+| 486 of 741 African gauges evidenced on the 1980 path against 242 | A | Second authorised read, disclosed. |
+| "Our protocol claims the frozen definition is the most generous reading and on this axis that is false" | A | A claim about our own document, checkable against it. |
+| P_unevidenced sits between 90.3% and 92.4% across zero to eight steps downstream | A | Full curve published. |
+| 1 of 463 evidenced before 2014, 241 of 278 after | A | Join to GRDC metadata, all 741 matched. |
+| "This is what a definitional cut looks like, not a dose-response" | **B** | Inference from the code's own period labels, `2014-2022` and `1980-2021`, named in the same paragraph. |
+| Gate F matched gives 2.71 pp and 4.00 pp, verdict unchanged | A | Recomputed from the ladder already in the results file. |
+| Broad degeneracy moves the metric of record from 0.385 to 0.320 | A | Both readings printed, neither called the truth. |
+| The credit paragraph | **C**, deliberately | A judgement that the release is more open than the field's norm. Kept because §11 requires it and because it is true. |
+| "The archive's spatial footprint is broad and its calendar is narrow" | A | 32 countries with files, 11 with values. |
+| Any single headline number | **absent** | Foreclosed by Gate D once the eleven-point spread was measured. |
+
 ## Standing checks, re-run each draft
 
 - `measured` appears only where the Note refuses the word, currently two instances, both of
