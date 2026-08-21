@@ -17,7 +17,7 @@ day-1 check did while the study was still blind. Adding a row to `UNBLINDED.json
 a second reading of the tarball that did not happen, and that file is worth more if it means
 exactly what it says.
 
-    A1  in reach, one and two steps downstream, against the frozen containing-basin definition
+    A1  the point's own drainage unit, and zero to eight basins downstream of it
     A2  P_unevidenced on a third population surface, WorldPop constrained, headline only
     A3  evidenced rate against Global Runoff Data Centre record end year and record length
     B1  effective sample size and a bootstrap interval for the Q4 weighted mean
@@ -56,8 +56,14 @@ def load():
 # -------------------------------------------------------------------------------------------
 # A1. In reach, propagated downstream.
 # -------------------------------------------------------------------------------------------
-def a1_downstream(pts, basins, steps=(0, 1, 2)):
-    """P_unevidenced when reach propagates k basins downstream of each forecast point.
+def a1_downstream(pts, basins, steps=tuple(range(9))):
+    """P_unevidenced when the footprint propagates k basins downstream of each forecast point.
+
+    The range runs to eight rather than to two. An earlier version stopped at two, which is
+    where the curve reaches its minimum, and the second external reviewer pointed out that a
+    reader is entitled to ask why a sensitivity stops exactly at the point of maximum effect.
+    The curve turns back at three and settles near 91%, so the full range is both the honest
+    answer and the stronger one.
 
     Step 0 is the frozen definition and must reproduce the published headline exactly. It is
     computed here rather than copied from the results file precisely so that it can be checked

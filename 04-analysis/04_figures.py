@@ -200,12 +200,87 @@ def fig_ladder(p):
                "released artefact and is never used.")
 
 
+def fig_range(p, ps, post):
+    """The headline is a range, and one lever we never examined opens it wider than every lever
+    we did examine put together. Two panels: the range on a 0 to 100 scale so the reader sees
+    where it sits absolutely, then the levers on a shared percentage-point scale so they are
+    comparable with each other rather than each to itself.
+
+    Emphasis colour, not categorical: the period lever is the accent and the three we did test
+    are the achromatic remainder. The distinction being drawn is examined against unexamined,
+    which is one thing plus its complement, and every bar is directly labelled so the colour is
+    never the only carrier.
+    """
+    lo = ps["primary"]["alt_1980"]["share"] * 100
+    hi = ps["primary"]["frozen_2014"]["share"] * 100
+    down = [v["share"] * 100 for v in post["a1_downstream_reach"].values()]
+
+    levers = [("Which evaluation period is read", abs(hi - lo),
+               "1980 against 2014, never argued for", True),
+              ("How far downstream the footprint runs", max(down) - min(down),
+               "zero to eight basins", False),
+              ("How strict the definition is", p["gate_d"]["spread_pp"],
+               "any value, two-year, five-year", False),
+              ("Which population surface", p["gate_e"]["spread_pp"],
+               "three surfaces", False)]
+
+    x0, scale = 300, 380 / 100.0
+    b = []
+
+    # Panel one, the range on an absolute scale.
+    y = 66
+    for t in (0, 25, 50, 75, 100):
+        gx = x0 + t * scale
+        b.append(f'<line x1="{gx:.1f}" y1="{y-6}" x2="{gx:.1f}" y2="{y+34}" class="grid"/>')
+        b.append(f'<text x="{gx:.1f}" y="{y+47}" class="tm" font-size="10.5" '
+                 f'text-anchor="middle">{t}%</text>')
+    b.append(f'<text x="{x0-12}" y="{y+18}" class="t1" font-size="12.5" text-anchor="end" '
+             f'font-weight="600">Population behind no</text>')
+    b.append(f'<text x="{x0-12}" y="{y+33}" class="t1" font-size="12.5" text-anchor="end" '
+             f'font-weight="600">published metric</text>')
+    b.append(bar(x0 + lo * scale, y, (hi - lo) * scale, 28, "c2"))
+    b.append(f'<text x="{x0 + lo*scale - 8:.1f}" y="{y+19}" class="t1" font-size="13" '
+             f'font-weight="600" text-anchor="end">{lo:.1f}%</text>')
+    b.append(f'<text x="{x0 + hi*scale + 8:.1f}" y="{y+19}" class="t1" font-size="13" '
+             f'font-weight="600">{hi:.1f}%</text>')
+
+    # Panel two, the levers on a shared percentage-point scale.
+    top, bh, gap = 178, 26, 20
+    lscale = 380 / 12.0
+    b.append(f'<text x="0" y="{top-16}" class="t2" font-size="12">How far each choice moves '
+             f'that figure, in percentage points</text>')
+    for i, (lab, v, sub, accent) in enumerate(levers):
+        yy = top + i * (bh + gap)
+        b.append(f'<text x="{x0-12}" y="{yy+12}" class="t1" font-size="12.5" '
+                 f'text-anchor="end">{lab}</text>')
+        b.append(f'<text x="{x0-12}" y="{yy+25}" class="tm" font-size="10.5" '
+                 f'text-anchor="end">{sub}</text>')
+        b.append(bar(x0, yy, v * lscale, bh, "c2" if accent else "cg"))
+        b.append(f'<text x="{x0 + v*lscale + 8:.1f}" y="{yy+18}" class="t1" font-size="12.5" '
+                 f'font-weight="600">{v:.1f}</text>')
+    yb = top + len(levers) * (bh + gap) - gap + 6
+    b.append(f'<line x1="{x0}" y1="{top-6}" x2="{x0}" y2="{yb}" class="axis"/>')
+    b.append(f'<text x="{x0}" y="{yb+18}" class="tm" font-size="11">'
+             f'Gate D forbids a single headline figure above 10 points. The top bar is '
+             f'{abs(hi-lo):.1f}.</text>')
+
+    return svg("\n".join(b), yb + 30,
+               "The headline is a range because of one choice nobody made deliberately",
+               "African population behind a forecast point carrying no published per-gauge "
+               "metric",
+               "The period lever was found by an external reviewer after the analysis ran. "
+               "The other three were pre-registered and measured.")
+
+
 def main():
     p = json.load(open(RESULTS / "primary.json"))
     c = pd.read_csv(RESULTS / "country_table.csv")
+    ps = json.load(open(RESULTS / "period_sensitivity.json"))
+    post = json.load(open(RESULTS / "post_review.json"))
     OUT.mkdir(parents=True, exist_ok=True)
     figs = {"fig1-gate-f.svg": fig_gate_f(p), "fig2-mapping-density.svg": fig_density(p),
-            "fig3-gauge-archive.svg": fig_archive(c), "fig4-denominator-ladder.svg": fig_ladder(p)}
+            "fig3-gauge-archive.svg": fig_archive(c), "fig4-denominator-ladder.svg": fig_ladder(p),
+            "fig5-period-range.svg": fig_range(p, ps, post)}
     for name, s in figs.items():
         (OUT / name).write_text(s)
         print(f"  wrote 06-report/figures/{name}  ({len(s):,} bytes)")

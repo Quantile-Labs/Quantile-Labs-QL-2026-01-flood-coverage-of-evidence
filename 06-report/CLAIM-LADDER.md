@@ -145,6 +145,10 @@ the Note promised to say, is checking half the thing.
   pre-registered sections, and 35 of 35 across the post-review section and the two corrected
   paragraphs, checked against `post_review.json` by parsing rather than by reading.
 - Nothing in the post-review section is quoted in the title, the standfirst or the
-  opening, and the section says in its first sentence that it is not pre-registered.
+  opening, and the section says in its first sentence that it is not pre-registered. The one
+  exception is deliberate: the range now leads the standfirst, because Gate D requires it to.
+- Every figure is generated from a results file, and every value plotted appears in the table
+  beside it. The downstream curve is stored in `post_review.json` rather than computed for the
+  chart, checked at all nine points.
 - No claim about the currently serving model, and the version uncertainty is reported instead
   of resolved.

@@ -204,6 +204,13 @@ across defensible definitions, no single headline number may be published, and t
 honestly presented is a publishable result while a point estimate chosen from several is not.
 Eleven points is more than ten. So the range is the result.
 
+![The headline is a range because of one choice nobody made deliberately. The African
+population behind a forecast point carrying no published per-gauge metric runs from 81.2% to
+92.4%. Of the four choices that move that figure, which evaluation period is read moves it 11.2
+percentage points, how far downstream the footprint runs moves it 2.1, how strict the definition
+is moves it 1.6, and which population surface is used moves it 0.4. Gate D forbids a single
+headline figure above 10 points.](figures/fig5-period-range.svg)
+
 | Definition of *evidenced* | African gauges evidenced | P_unevidenced |
 |---|---:|---:|
 | Evaluation period from 1980, and the union of both | 486 of 741 | **81.2%** |
@@ -599,8 +606,8 @@ python3 04-analysis/05_post_review.py
 python3 04-analysis/06_period_sensitivity.py --unblind --rerun-reason "..."
 ```
 
-Figures are regenerated from the results files by `04-analysis/04_figures.py` and are committed
-as SVG, so a change to a chart shows up as a reviewable diff and not an opaque binary swap. Every
+Figures are regenerated from the results files by `04-analysis/04_figures.py`, five of them, and
+are committed as SVG, so a change to a chart shows up as a reviewable diff and not an opaque binary swap. Every
 value plotted appears in the table beside it and in the machine-readable results, so the charts
 carry nothing a reader cannot also read as text.
 

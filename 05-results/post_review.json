@@ -23,6 +23,48 @@
       "denominator_pop": 104908719.78037104,
       "basins_in_reach": 9357,
       "basins_unevidenced": 8701
+    },
+    "steps_3": {
+      "share": 0.9055416251546481,
+      "numerator_pop": 103837247.95937955,
+      "denominator_pop": 114668663.56546146,
+      "basins_in_reach": 10556,
+      "basins_unevidenced": 9739
+    },
+    "steps_4": {
+      "share": 0.90872420783869,
+      "numerator_pop": 111830799.89505792,
+      "denominator_pop": 123063520.18621396,
+      "basins_in_reach": 11520,
+      "basins_unevidenced": 10565
+    },
+    "steps_5": {
+      "share": 0.9092679446739861,
+      "numerator_pop": 120264290.27877127,
+      "denominator_pop": 132264962.14148568,
+      "basins_in_reach": 12320,
+      "basins_unevidenced": 11245
+    },
+    "steps_6": {
+      "share": 0.9104704231037853,
+      "numerator_pop": 126057088.77652319,
+      "denominator_pop": 138452700.46971512,
+      "basins_in_reach": 13002,
+      "basins_unevidenced": 11819
+    },
+    "steps_7": {
+      "share": 0.9115534032398619,
+      "numerator_pop": 135746514.3568931,
+      "denominator_pop": 148917785.69902766,
+      "basins_in_reach": 13589,
+      "basins_unevidenced": 12320
+    },
+    "steps_8": {
+      "share": 0.9109969256987408,
+      "numerator_pop": 139901821.4297327,
+      "denominator_pop": 153570025.85099512,
+      "basins_in_reach": 14095,
+      "basins_unevidenced": 12751
     }
   },
   "a2_constrained_surface": {
