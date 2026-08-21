@@ -75,18 +75,29 @@ def parse_table(text):
 
 
 def f1_at(recs, rp, window, lead):
-    """Derived F1, plus whether the pair is degenerate. None where either input is null."""
+    """Derived F1, plus two degeneracy flags. None where either input is null.
+
+    TWO FLAGS, AND NEITHER IS DESIGNATED THE TRUTH. Corrected 2026-08-21 under PROTOCOL §11a
+    after external review. This returned a single flag set only where precision *and* recall
+    were both exactly 1.0. The released code's degenerate return is per quantity: it yields 1
+    where there are no observed and no predicted events, and 1 again where no observed data
+    surrounds any predicted event. So a gauge can be degenerate in one quantity and genuine in
+    the other, and the old flag missed every such case. A published 1.0 cannot be told apart
+    from a genuine 1.0 by its value, so the honest response is not to pick a better single rule
+    but to report the strict reading, both equal to 1.0, and the broad reading, either equal to
+    1.0, side by side and let a reader take the one they can defend.
+    """
     if "precision" not in recs or "recall" not in recs:
-        return None, False
+        return None, (False, False)
     got = {}
     for m in ("precision", "recall"):
         cell = parse_table(recs[m]).get((rp, window))
         if cell is None or lead >= len(cell) or cell[lead] is None:
-            return None, False
+            return None, (False, False)
         got[m] = cell[lead]
     p, r = got["precision"], got["recall"]
-    degenerate = (p == 1.0 and r == 1.0)
-    return (0.0 if (p + r) == 0 else 2 * p * r / (p + r)), degenerate
+    flags = (p == 1.0 and r == 1.0, p == 1.0 or r == 1.0)
+    return (0.0 if (p + r) == 0 else 2 * p * r / (p + r)), flags
 
 
 def weighted_median(values, weights):
@@ -147,7 +158,8 @@ def main():
                     if f1 is None:
                         continue
                     rows.append({"gauge": gid, "rp": rp, "f1": f1,
-                                 "degenerate": deg, "pop": float(w)})
+                                 "degenerate": deg[0], "degenerate_broad": deg[1],
+                                 "pop": float(w)})
             if not rows:
                 print(f"\n{year}/{exp}: no evidenced African gauges")
                 continue
@@ -163,8 +175,15 @@ def main():
                 if s.empty:
                     continue
                 nd = s[~s.degenerate]
+                nb = s[~s.degenerate_broad]
                 rec = {
                     "n": int(len(s)), "degenerate": int(s.degenerate.sum()),
+                    "degenerate_broad": int(s.degenerate_broad.sum()),
+                    "unweighted_mean_excl_degenerate_broad":
+                        float(nb.f1.mean()) if len(nb) else float("nan"),
+                    "pop_weighted_mean_excl_degenerate_broad":
+                        float((nb.f1 * nb.pop).sum() / nb["pop"].sum())
+                        if len(nb) and nb["pop"].sum() else float("nan"),
                     "unweighted_mean": float(s.f1.mean()),
                     "pop_weighted_mean": float(np.average(s.f1, weights=s["pop"]))
                         if s["pop"].sum() else float("nan"),
