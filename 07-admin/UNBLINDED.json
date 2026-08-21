@@ -6,6 +6,13 @@
       "protocol_sha256": "b05c0b932ddb9c6db2f192ff5804570197470175e50ed21ce7520839321d2248",
       "frozen_path": "metrics/return_period_metrics/google/2014/dual_lstm/full_run/",
       "reason": "first authorised run"
+    },
+    {
+      "utc": "2026-08-21T10:11:07Z",
+      "frozen_analysis_sha": "23c05f4c7264c338de7e1037b09c87469d467f28",
+      "protocol_sha256": "5adba15ae939ecc37c8c3d340b967498817dfd85c8870a069cf0e74cd8bb9f3c",
+      "frozen_path": "metrics/return_period_metrics/google/2014/dual_lstm/full_run/",
+      "reason": "PROTOCOL 11a period sensitivity: the frozen definition reads the 2014 path only and section 5 claims it is the most generous available. Raised by external review 2026-08-21 and verified before running."
     }
   ]
 }

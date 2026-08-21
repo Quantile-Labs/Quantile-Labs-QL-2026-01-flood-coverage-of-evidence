@@ -1,0 +1,56 @@
+{
+  "protocol_section": "11a",
+  "pre_registered": false,
+  "rerun_reason": "PROTOCOL 11a period sensitivity: the frozen definition reads the 2014 path only and section 5 claims it is the most generous available. Raised by external review 2026-08-21 and verified before running.",
+  "paths": {
+    "frozen_2014": "metrics/return_period_metrics/google/2014/dual_lstm/full_run/",
+    "alt_1980": "metrics/return_period_metrics/google/1980/dual_lstm/full_run/"
+  },
+  "counts": {
+    "frozen_2014": {
+      "gauges_with_file": 5678,
+      "evidenced_global": 3378,
+      "african_with_file": 741,
+      "african_evidenced": 242
+    },
+    "alt_1980": {
+      "gauges_with_file": 5678,
+      "evidenced_global": 5056,
+      "african_with_file": 741,
+      "african_evidenced": 486
+    },
+    "union": {
+      "evidenced_global": 5057,
+      "african_evidenced": 486
+    }
+  },
+  "primary": {
+    "frozen_2014": {
+      "share": 0.9242618610192088,
+      "numerator_pop": 65852419.98060938,
+      "denominator_pop": 71248660.9671334,
+      "basins_numerator": 5478,
+      "basins_denominator": 5720,
+      "shift_pp_from_frozen": 0.0
+    },
+    "alt_1980": {
+      "share": 0.8121870912479885,
+      "numerator_pop": 57867242.70621017,
+      "denominator_pop": 71248660.9671334,
+      "basins_numerator": 5234,
+      "basins_denominator": 5720,
+      "shift_pp_from_frozen": -11.207476977122033
+    },
+    "union": {
+      "share": 0.8121870912479885,
+      "numerator_pop": 57867242.70621017,
+      "denominator_pop": 71248660.9671334,
+      "basins_numerator": 5234,
+      "basins_denominator": 5720,
+      "shift_pp_from_frozen": -11.207476977122033
+    }
+  },
+  "spread_pp": 11.207476977122033,
+  "gate_d_abandonment_threshold_pp": 10.0,
+  "exceeds_gate_d_threshold": true
+}

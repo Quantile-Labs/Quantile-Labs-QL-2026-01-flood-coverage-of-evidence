@@ -61,6 +61,9 @@ outcomes. A re-run after a post-unblinding bug fix gets its own row with the rea
 | ✎ 2026-08-20T21:38:36Z | `03-harness/02d_add_worldpop_constrained.py` | 5ba8740 (run before commit; file sha256 `84303dd685e6`) | basins_af_geom.parquet · basins_af.parquet · 51 WorldPop constrained country rasters, each hashed into MANIFEST.csv on arrival and deleted | blind (no metric value read) | `02-data/interim/strata/pop_worldpop_constrained.csv` `88b9dd5647fc` | Post-hoc third population surface, PROTOCOL §11a. Headline only, forbidden in stratum 3. Writes its own file rather than a column in the blind-built basin frame. |
 | ✎ 2026-08-20T21:39:20Z | `04-analysis/05_post_review.py` | 5ba8740 (run before commit; file sha256 `6a48af6e6587`) | `points_evidence.csv` · basins_af.parquet · `pop_worldpop_constrained.csv` · metrics.tgz `237559b9abbe` (member names and container structure only, no value read) | post-unblinding, and it reads no metric value | `05-results/post_review.json` `f86624c5ac39` | The five post-hoc additions under PROTOCOL §11a. Deliberately adds no row to `UNBLINDED.json`: the single shot was spent once, on 2026-08-12, and the marker should say that and nothing else. |
 
+| 2026-08-21T10:11:07Z | `04-analysis/06_period_sensitivity.py --unblind --rerun-reason ...` | 23c05f4 | metrics.tgz `237559b9abbe`, both the 2014 and 1980 `full_run` return-period trees | **UNBLINDED, second authorised read** | `05-results/period_sensitivity.json` | P_unevidenced 92.43% frozen, 81.22% on the 1980 path, shift 11.21 pp. Reason: §5 claims the frozen definition is the most generous available and it is not. Raised by external review, verified before running. |
+| 2026-08-21T10:14:—Z | `04-analysis/03_q4_skill.py --unblind` | 23c05f4 | metrics.tgz `237559b9abbe` | **UNBLINDED, re-run** | `05-results/q4_skill.json` overwritten | Re-run after the degeneracy flag was made two-sided under PROTOCOL §11a. Supersedes the 2026-08-12 output, which remains in git history at that commit. Broad degeneracy at the metric of record is 48 of 218 against a strict 4. |
+
 ## Unblinding record
 
 - **Date (UTC):** 2026-08-12T22:38:45Z
@@ -74,7 +77,12 @@ outcomes. A re-run after a post-unblinding bug fix gets its own row with the rea
 - **Prior blind development:** the full pipeline was built and exercised against permuted
   labels (seed 20260806) across 2026-08-07 and 2026-08-08, per §10. Three defects were found
   and fixed while blind, three of which became protocol v1.9 amendments.
-- **Post-unblinding changes:** two, both on 2026-08-20, neither touching the primary metric.
+- **Post-unblinding changes:** four. Two on 2026-08-20 under protocol §11a, neither touching
+  the primary metric. Two on 2026-08-21 after external review, and these do touch it: a
+  **second authorised read** of the 1980 metric path, which puts the primary metric at
+  81.22% against the frozen 92.43%, and a re-run of `03_q4_skill.py` with a corrected
+  degeneracy flag. `01_evidence.py` and `02_primary.py` have not been re-run and their
+  outputs are unchanged.
   `03-harness/02d_add_worldpop_constrained.py` and `04-analysis/05_post_review.py` were added
   under protocol §11a after an adversarial self-review of the draft, and protocol v1.10 records
   what they are and what they may not be used for. **No script in the pre-registered pipeline

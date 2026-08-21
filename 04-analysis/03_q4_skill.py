@@ -182,7 +182,7 @@ def main():
                     "unweighted_mean_excl_degenerate_broad":
                         float(nb.f1.mean()) if len(nb) else float("nan"),
                     "pop_weighted_mean_excl_degenerate_broad":
-                        float((nb.f1 * nb.pop).sum() / nb["pop"].sum())
+                        float((nb.f1 * nb["pop"]).sum() / nb["pop"].sum())
                         if len(nb) and nb["pop"].sum() else float("nan"),
                     "unweighted_mean": float(s.f1.mean()),
                     "pop_weighted_mean": float(np.average(s.f1, weights=s["pop"]))
