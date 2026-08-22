@@ -12,8 +12,11 @@ technical review before that clock starts.
 
 | # | Field | Sent | Draft reviewed | Responded | Conflicts declared |
 |---|---|---|---|---|---|
-| 1 | hydrology | 2026-08-21 | commit `42f301a`, protocol v1.10 | 2026-08-21 | not yet on file |
-| 2 | hydrology and forecast verification | 2026-08-21 | commit `42f301a`, protocol v1.10 | 2026-08-21 | not yet on file |
+| 1 | hydrology | 2026-08-21 | commit `42f301a`, protocol v1.10 | 2026-08-21 | none, 2026-08-22 |
+| 2 | hydrology and forecast verification | 2026-08-21 | commit `42f301a`, protocol v1.10 | 2026-08-21 | none, 2026-08-22 |
+
+Both reviewers declared no relationship with Google or Alphabet, recorded 2026-08-22 and set out
+in `01-scoping/CONFLICTS.md` alongside our own.
 
 ## Reviewer 1, received 2026-08-21
 

@@ -32,7 +32,8 @@ independently before the analysis was run. It now stands at v1.10, sha256 `f9502
 adds the post-hoc section §11a and nothing the frozen result depends on. **v1.10 is not
 anchored**, and the version that matters for the pre-registration claim is v1.9, which is.
 **Data and code:** [10.5281/zenodo.21843331](https://doi.org/10.5281/zenodo.21843331).
-**Conflicts:** none declared, see `CONFLICTS.md`.
+**Conflicts:** none, ours or our two reviewers', see `CONFLICTS.md`. Neither reviewer is an
+author, neither has endorsed this Note, and what they found is in `REVIEW-LOG.md`.
 
 This Note reports what the published record contains, and it makes no claim about how well the
 model works anywhere. The qualifications below belong at the top of the document instead of in a
